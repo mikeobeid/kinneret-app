@@ -9,7 +9,7 @@ export default function App() {
       className={`px-3 py-2 rounded-xl ${
         pathname === to
           ? "bg-blue-600 text-white"
-          : "text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-700"
+          : "text-gray-700 dark:text-gray-100 hover:bg-blue-50 dark:hover:bg-gray-600"
       }`}
       to={to}
     >
@@ -18,8 +18,8 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <header className="sticky top-0 z-10 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-200">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-800">
+      <header className="sticky top-0 z-10 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
           <div className="font-semibold">Kinneret 3D BioGeo Dashboard</div>
           <nav className="flex gap-2">
