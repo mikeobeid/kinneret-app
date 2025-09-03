@@ -20,15 +20,18 @@ export default function Overview() {
   return (
     <div className="space-y-4">
       <h1 className="text-xl font-semibold">Project Overview</h1>
-      
-      <p className="text-sm text-gray-600">3D physical + biogeochemical model of Lake Kinneret.</p>
+
+      <p className="text-sm text-gray-600 dark:text-gray-300">3D physical + biogeochemical model of Lake Kinneret.</p>
       
       {/* Dynamic phytoplankton group cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {groups.map((g) => (
-          <div key={g.id} className="rounded-xl bg-white border p-4">
+          <div
+            key={g.id}
+            className="rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-4"
+          >
             <div className="font-medium">{g.label}</div>
-            <div className="text-xs text-gray-500">
+            <div className="text-xs text-gray-500 dark:text-gray-300">
               μ={g.mu} d⁻¹ · N/P={g.rnp} · Si/P={g.rsip}
             </div>
           </div>
