@@ -18,7 +18,7 @@ export interface GroupParam {
 }
 
 export interface TimeseriesPoint {
-  chl: any;
+  chl: number;
   date: string;
   station: string;
   depth_m: number;

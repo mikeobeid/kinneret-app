@@ -16,7 +16,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
-      <header className="sticky top-0 z-10 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+      <header className="sticky top-0 z-10 bg-white dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
           <div className="font-semibold">Kinneret 3D BioGeo Dashboard</div>
           <nav className="flex gap-2">
