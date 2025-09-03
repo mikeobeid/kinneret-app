@@ -1,0 +1,7 @@
+[
+  { "id": "Diatom", "label": "Diatoms", "mu": 0.4, "rnp": 16, "rfep": 1, "rsip": 16, "ksP": 0.035, "ksN": 0.56, "ksFe": 0.035 },
+  { "id": "Dinoflagellates", "label": "Dinoflagellates", "mu": 0.4, "rnp": 16, "rfep": 1, "rsip": 0, "ksP": 0.035, "ksN": 0.56, "ksFe": 0.035 },
+  { "id": "SmallPhyto", "label": "Small Phytoplankton", "mu": 0.7, "rnp": 16, "rfep": 1, "rsip": 0, "ksP": 0.015, "ksN": 0.24, "ksFe": 0.015 },
+  { "id": "Nfixers", "label": "N-fixing Cyanobacteria", "mu": 0.7, "rnp": 16, "rfep": 1, "rsip": 0, "ksP": 0.01, "ksN": 0.16, "ksFe": 0.01 },
+  { "id": "Microcystis", "label": "Microcystis", "mu": 0.7, "rnp": 16, "rfep": 1, "rsip": 0, "ksP": 0.01, "ksN": 0.16, "ksFe": 0.01 }
+]

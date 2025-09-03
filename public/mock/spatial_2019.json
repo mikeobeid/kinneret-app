@@ -1,0 +1,6 @@
+[
+  { "season": "winter", "x": 10, "y": 5, "biomassPmm3": 1.2 },
+  { "season": "winter", "x": 15, "y": 6, "biomassPmm3": 2.8 },
+  { "season": "summer", "x": 3, "y": 12, "biomassPmm3": 4.6 },
+  { "season": "summer", "x": 2, "y": 13, "biomassPmm3": 4.9 }
+]

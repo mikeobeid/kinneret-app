@@ -1,0 +1,6 @@
+[
+  { "date": "2019-03-01", "station": "82", "depth_m": 0, "variable": "chlorophyll", "value": 2.1 },
+  { "date": "2019-04-01", "station": "82", "depth_m": 0, "variable": "chlorophyll", "value": 4.0 },
+  { "date": "2019-06-01", "station": "82", "depth_m": 0, "variable": "biomass", "group": "Microcystis", "value": 3.2 },
+  { "date": "2019-08-01", "station": "82", "depth_m": 0, "variable": "biomass", "group": "Nfixers", "value": 4.5 }
+]
