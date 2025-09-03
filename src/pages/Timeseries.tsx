@@ -40,9 +40,9 @@ export default function Timeseries() {
   }, [rows]);
 
   return (
-    <div className="space-y-3 text-gray-900 dark:text-gray-100">
+    <div className="space-y-3 text-gray-900 dark:text-gray-200">
       <h1 className="text-xl font-semibold">Time-Series</h1>
-      <p className="text-sm text-gray-600 dark:text-gray-400">
+      <p className="text-sm text-gray-600 dark:text-gray-300">
         Modeled biomass vs. observed chlorophyll (mock data).
       </p>
 
@@ -55,7 +55,7 @@ export default function Timeseries() {
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date" tick={{ fontSize: 11, fill: "currentColor" }} tickLine={{ stroke: "currentColor" }} axisLine={{ stroke: "currentColor" }} />
             <YAxis tick={{ fontSize: 11, fill: "currentColor" }} tickLine={{ stroke: "currentColor" }} axisLine={{ stroke: "currentColor" }} />
-            <Tooltip contentStyle={{ background: "#111827", color: "#fff", border: "1px solid #1f2937" }} wrapperStyle={{ outline: "none" }} />
+            <Tooltip contentStyle={{ background: "#1f2937", color: "#fff", border: "1px solid #374151" }} wrapperStyle={{ outline: "none" }} />
             <Legend />
             <Line type="monotone" dataKey="chlorophyll" strokeWidth={2} dot={false} />
             <Line type="monotone" dataKey="biomass" strokeWidth={2} dot={false} />
