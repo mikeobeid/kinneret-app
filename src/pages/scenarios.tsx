@@ -253,9 +253,9 @@ export function ScenariosPage() {
         </div>
       </header>
 
-      <div className="grid gap-6 xl:grid-cols-2">
+      <div className="grid gap-6 lg:grid-cols-2">
         {/* Left Column - Parameters */}
-        <div className="space-y-6">
+        <div className="space-y-6 min-w-0">
                      {/* Global Nutrients */}
            <Card>
              <CardHeader>
@@ -267,7 +267,7 @@ export function ScenariosPage() {
              <CardContent className="space-y-4">
                {Object.entries(nutrientValues).map(([nutrient, config]) => (
                  <div key={nutrient} className="space-y-2">
-                   <div className="flex justify-between items-center">
+                   <div className="grid grid-cols-[1fr_auto] items-center gap-2">
                      <label 
                        htmlFor={`nutrient-${nutrient}`}
                        className="text-sm font-medium"
@@ -318,9 +318,9 @@ export function ScenariosPage() {
                      <AccordionContent className="space-y-4">
                        {Object.entries(group.params).map(([paramName, config]) => (
                          <div key={paramName} className="space-y-2">
-                           <div className="flex justify-between items-center">
+                           <div className="grid grid-cols-[1fr_auto] items-center gap-2">
                              <div>
-                               <label 
+                               <label
                                  htmlFor={`${group.name}-${paramName}`}
                                  className="text-sm font-medium"
                                >
@@ -328,7 +328,7 @@ export function ScenariosPage() {
                                </label>
                                <p className="text-xs text-muted-foreground">{config.description}</p>
                              </div>
-                             <span 
+                             <span
                                className="text-sm text-muted-foreground"
                                aria-live="polite"
                                aria-label={`Current ${paramName} value`}
@@ -386,7 +386,7 @@ export function ScenariosPage() {
         </div>
 
         {/* Right Column - Results */}
-        <div className="space-y-6">
+        <div className="space-y-6 min-w-0">
                      {/* Results Chart */}
            <FigureFrame
              ref={modelResultsRef}
