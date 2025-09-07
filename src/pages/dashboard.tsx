@@ -64,11 +64,11 @@ export function DashboardPage() {
   const microcystisStats = calculateStats('microcystis')
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-          <p className="text-muted-foreground">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Dashboard</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">
             Interactive Kinneret biogeochemical insights — groups, seasons, and nutrient scenarios.
           </p>
         </div>
@@ -82,7 +82,7 @@ export function DashboardPage() {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             <Card>
               <CardHeader>
                 <CardTitle>Concentration Statistics</CardTitle>
@@ -166,8 +166,7 @@ export function DashboardPage() {
               </div>
             </FigureFrame>
 
-            {/* Line Chart */}
-            <FigureFrame
+            {/* Line Chart */}            <FigureFrame
               ref={biomassChartRef}
               title="Biomass (mmol P/m³)"
               subtitle="Monthly trends for phytoplankton groups"
@@ -178,7 +177,7 @@ export function DashboardPage() {
               figureKey="biomass-chart"
               supportsSVG={true}
             >
-              <div className="h-64">
+              <div className="h-48 sm:h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={biomassData}>
                     <CartesianGrid strokeDasharray="3 3" />

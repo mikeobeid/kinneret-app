@@ -17,7 +17,7 @@ export function MainLayout({ children }: MainLayoutProps) {
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
       <main className="ml-0 md:ml-64 transition-all duration-200">
-        <div className="container mx-auto p-4 min-h-[calc(100vh-4rem)]">
+        <div className="container mx-auto p-3 sm:p-4 min-h-[calc(100vh-4rem)]">
           <DemoBanner />
           <div className="mt-4">
             {children || <Outlet />}

@@ -43,19 +43,19 @@ export function HomePage() {
   ]
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Hero Section */}
-      <section className="text-center space-y-6 py-12">
-        <div className="space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight text-foreground">
+      <section className="text-center space-y-4 sm:space-y-6 py-8 sm:py-12">
+        <div className="space-y-3 sm:space-y-4">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
             Kinneret 3D Biogeochemical Model
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Interactive Kinneret biogeochemical insights — groups, seasons, and nutrient scenarios.
           </p>
         </div>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
           <Button asChild size="lg">
             <Link to="/dashboard">
               <BarChart3 className="mr-2 h-5 w-5" />
@@ -74,7 +74,7 @@ export function HomePage() {
       {/* KPI Cards */}
       <section>
         <h2 className="text-2xl font-semibold mb-6">Key Performance Indicators</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {kpis.map((kpi) => {
             const Icon = kpi.icon
             return (
@@ -95,7 +95,7 @@ export function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="grid md:grid-cols-2 gap-8">
+      <section className="grid lg:grid-cols-2 gap-6 sm:gap-8">
         <div>
           <h2 className="text-2xl font-semibold mb-4">What's in this app?</h2>
           <ul className="space-y-3">

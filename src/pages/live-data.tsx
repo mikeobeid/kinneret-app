@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Button } from '@/components/ui/button'
@@ -15,11 +15,11 @@ export function LiveDataPage() {
 
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Live Data</h1>
-          <p className="text-muted-foreground">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Live Data</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">
             Interactive Kinneret biogeochemical insights — groups, seasons, and nutrient scenarios.
           </p>
         </div>
@@ -92,8 +92,8 @@ export function LiveDataPage() {
                   Latest measurements from this monitoring station
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="grid gap-4 md:grid-cols-2">
+            <CardContent>
+              <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
                     <h4 className="font-medium">Station Data</h4>
                     <div className="space-y-1">
@@ -139,7 +139,7 @@ export function LiveDataPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-96 bg-muted/20 rounded-lg flex items-center justify-center">
+              <div className="h-64 sm:h-96 bg-muted/20 rounded-lg flex items-center justify-center">
                 <div className="text-center space-y-4">
                   <BarChart3 className="h-12 w-12 mx-auto text-muted-foreground" />
                   <div>
@@ -163,7 +163,7 @@ export function LiveDataPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-96 bg-muted/20 rounded-lg flex items-center justify-center">
+              <div className="h-64 sm:h-96 bg-muted/20 rounded-lg flex items-center justify-center">
                 <div className="text-center space-y-4">
                   <Clock className="h-12 w-12 mx-auto text-muted-foreground" />
                   <div>

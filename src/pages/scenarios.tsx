@@ -243,17 +243,17 @@ export function ScenariosPage() {
   const seasonalDominance = getSeasonalDominance()
 
   return (
-    <div className="space-y-6">
-      <header className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Scenarios</h1>
-          <p className="text-muted-foreground">
+    <div className="space-y-4 sm:space-y-6">
+      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Scenarios</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">
             Interactive Kinneret biogeochemical insights — groups, seasons, and nutrient scenarios.
           </p>
         </div>
       </header>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 xl:grid-cols-2">
         {/* Left Column - Parameters */}
         <div className="space-y-6">
                      {/* Global Nutrients */}
@@ -399,7 +399,7 @@ export function ScenariosPage() {
              figureKey="model-results"
              supportsSVG={true}
            >
-             <div className="h-80" role="img" aria-label="Phytoplankton biomass simulation chart showing monthly data for five groups">
+             <div className="h-64 sm:h-80" role="img" aria-label="Phytoplankton biomass simulation chart showing monthly data for five groups">
                <LazyChart data={resultsData} colors={colors} height={320} />
              </div>
            </FigureFrame>
@@ -451,7 +451,7 @@ export function ScenariosPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {Object.entries(seasonalDominance).map(([season, groups]) => (
                   <div key={season} className="space-y-2">
                     <h4 className="text-sm font-medium capitalize">{season}</h4>

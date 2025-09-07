@@ -45,16 +45,16 @@ export const FigureFrame = forwardRef<HTMLDivElement, FigureFrameProps>(({
   return (
     <Card className={`relative ${className}`}>
       <CardHeader className="pb-3">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <CardTitle className="text-lg">{title}</CardTitle>
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            <CardTitle className="text-lg sm:text-xl break-words">{title}</CardTitle>
             {subtitle && (
-              <CardDescription className="mt-1">{subtitle}</CardDescription>
+              <CardDescription className="mt-1 text-sm break-words">{subtitle}</CardDescription>
             )}
           </div>
           
           {/* Export Controls */}
-          <div className="ml-4">
+          <div className="flex-shrink-0">
             <FigureExportControls
               elementRef={ref}
               metadata={metadata}
@@ -71,8 +71,8 @@ export const FigureFrame = forwardRef<HTMLDivElement, FigureFrameProps>(({
         {/* Main Figure Content */}
         <div 
           ref={ref}
-          className="relative"
-          style={{ minHeight: '300px' }}
+          className="relative overflow-x-auto"
+          style={{ minHeight: '250px' }}
         >
           {children}
         </div>

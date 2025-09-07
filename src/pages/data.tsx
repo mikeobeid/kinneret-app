@@ -162,15 +162,15 @@ export function DataPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Data Management</h1>
-        <p className="text-muted-foreground">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Data Management</h1>
+        <p className="text-muted-foreground text-sm sm:text-base">
           Upload, validate, and export phytoplankton data
         </p>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 xl:grid-cols-2">
         {/* Upload Section */}
         <div className="space-y-4">
           <Card>
@@ -359,7 +359,7 @@ export function DataPage() {
               <CardTitle>Data Summary</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div>
                   <p className="text-muted-foreground">Total Rows</p>
                   <p className="font-medium">{dataSummary.totalRows}</p>

@@ -125,20 +125,20 @@ export function FigureExportControls({
   const currentSize = sizeOptions.find(s => s.value === exportSize)
 
   return (
-    <Card className={`w-fit ${className}`}>
-      <CardContent className="p-3">
-        <div className="flex items-center gap-2">
+    <Card className={`w-fit max-w-full ${className}`}>
+      <CardContent className="p-2 sm:p-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
           {/* Export Buttons */}
-          <div className="flex gap-1">
+          <div className="flex gap-1 flex-wrap">
             <Button
               size="sm"
               variant="outline"
               onClick={() => handleExport('png')}
               disabled={isExporting}
-              className="flex items-center gap-1"
+              className="flex items-center gap-1 text-xs sm:text-sm"
             >
               <Image className="h-3 w-3" />
-              PNG
+              <span className="hidden xs:inline">PNG</span>
             </Button>
             
             {supportsSVG && (
@@ -147,10 +147,10 @@ export function FigureExportControls({
                 variant="outline"
                 onClick={() => handleExport('svg')}
                 disabled={isExporting}
-                className="flex items-center gap-1"
+                className="flex items-center gap-1 text-xs sm:text-sm"
               >
                 <FileText className="h-3 w-3" />
-                SVG
+                <span className="hidden xs:inline">SVG</span>
               </Button>
             )}
           </div>
@@ -158,10 +158,10 @@ export function FigureExportControls({
           {/* Style Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button size="sm" variant="outline" className="flex items-center gap-1">
+              <Button size="sm" variant="outline" className="flex items-center gap-1 text-xs sm:text-sm">
                 <Palette className="h-3 w-3" />
                 {currentStyle?.icon && <currentStyle.icon className="h-3 w-3" />}
-                {currentStyle?.label}
+                <span className="hidden sm:inline">{currentStyle?.label}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -182,9 +182,9 @@ export function FigureExportControls({
           {/* Size Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button size="sm" variant="outline" className="flex items-center gap-1">
+              <Button size="sm" variant="outline" className="flex items-center gap-1 text-xs sm:text-sm">
                 <Settings className="h-3 w-3" />
-                {currentSize?.label}
+                <span className="hidden sm:inline">{currentSize?.label}</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -204,9 +204,9 @@ export function FigureExportControls({
           {/* Options */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button size="sm" variant="outline" className="flex items-center gap-1">
+              <Button size="sm" variant="outline" className="flex items-center gap-1 text-xs sm:text-sm">
                 <Settings className="h-3 w-3" />
-                Options
+                <span className="hidden sm:inline">Options</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">

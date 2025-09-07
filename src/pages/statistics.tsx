@@ -1,7 +1,6 @@
-import React from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Cell, ScatterChart, Scatter } from 'recharts'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts'
 import { useDataStore } from '@/store/data-store'
 import { FigureFrame } from '@/components/figure-frame'
 import { useRef } from 'react'
@@ -73,23 +72,23 @@ export function StatisticsPage() {
 
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Statistics</h1>
-          <p className="text-muted-foreground">
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Statistics</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">
             Comprehensive analysis of phytoplankton data trends and patterns
           </p>
         </div>
       </div>
 
       <Tabs defaultValue="temporal" className="space-y-4">
-        <TabsList>
-          <TabsTrigger value="temporal">Temporal Trends</TabsTrigger>
-          <TabsTrigger value="monthly">Monthly Trends</TabsTrigger>
-          <TabsTrigger value="yearly">Yearly Distribution</TabsTrigger>
-          <TabsTrigger value="predictions" disabled>Future Predictions</TabsTrigger>
-          <TabsTrigger value="emissions" disabled>Emissions</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-3 lg:grid-cols-5">
+          <TabsTrigger value="temporal" className="text-xs sm:text-sm">Temporal</TabsTrigger>
+          <TabsTrigger value="monthly" className="text-xs sm:text-sm">Monthly</TabsTrigger>
+          <TabsTrigger value="yearly" className="text-xs sm:text-sm">Yearly</TabsTrigger>
+          <TabsTrigger value="predictions" disabled className="text-xs sm:text-sm hidden lg:block">Predictions</TabsTrigger>
+          <TabsTrigger value="emissions" disabled className="text-xs sm:text-sm hidden lg:block">Emissions</TabsTrigger>
         </TabsList>
 
         <TabsContent value="temporal" className="space-y-4">
@@ -104,7 +103,7 @@ export function StatisticsPage() {
             figureKey="temporal-trends"
             supportsSVG={true}
           >
-            <div className="h-96">
+            <div className="h-64 sm:h-80 lg:h-96">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={temporalData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -186,7 +185,7 @@ export function StatisticsPage() {
             figureKey="monthly-trends"
             supportsSVG={true}
           >
-            <div className="h-96">
+            <div className="h-64 sm:h-80 lg:h-96">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={monthlyData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -241,7 +240,7 @@ export function StatisticsPage() {
             <div className="space-y-4">
               {/* Custom Box Plot Visualization */}
               <div className="space-y-3">
-                {yearlyDistributionData.map((item, index) => (
+                {yearlyDistributionData.map((item) => (
                   <div key={item.group} className="flex items-center gap-4">
                     <div className="w-32 text-sm font-medium text-right">{item.group}</div>
                     <div className="flex-1 relative h-8 flex items-center">

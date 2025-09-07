@@ -1,17 +1,15 @@
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Button } from '@/components/ui/button'
 import { DepthProfileChart } from '@/components/depth-profile-chart'
 import { ZooplanktonChart } from '@/components/zooplankton-chart'
 import { EnhancedMapView } from '@/components/enhanced-map-view'
 import { FigureFrame } from '@/components/figure-frame'
-import { BarChart3, Map, Activity, Fish, TrendingUp, Calendar } from 'lucide-react'
+import { TrendingUp } from 'lucide-react'
 import mapData from '@/data/maps.json'
 import researchParams from '@/data/research-parameters.json'
 
 export function ResearchDashboardPage() {
-  const [selectedTimeframe, setSelectedTimeframe] = useState<'annual' | 'seasonal' | 'monthly'>('annual')
   
   // Refs for export
   const depthProfileRef = useRef<HTMLDivElement>(null)
@@ -20,13 +18,13 @@ export function ResearchDashboardPage() {
 
 
   return (
-    <div className="space-y-6">
-      <header className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">
+    <div className="space-y-4 sm:space-y-6">
+      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
             Research Dashboard — Lake Kinneret
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm sm:text-base">
             Scientific analysis based on 3D biogeochemical model and monitoring data
           </p>
         </div>
@@ -44,7 +42,7 @@ export function ResearchDashboardPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="space-y-2">
               <h4 className="font-semibold text-green-700 dark:text-green-400">Model Success</h4>
               <p className="text-sm text-muted-foreground">
@@ -69,11 +67,11 @@ export function ResearchDashboardPage() {
 
       {/* Main Analysis Tabs */}
       <Tabs defaultValue="phytoplankton" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="phytoplankton">Phytoplankton</TabsTrigger>
-          <TabsTrigger value="zooplankton">Zooplankton</TabsTrigger>
-          <TabsTrigger value="spatial">Spatial Patterns</TabsTrigger>
-          <TabsTrigger value="parameters">Model Parameters</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4">
+          <TabsTrigger value="phytoplankton" className="text-xs sm:text-sm">Phytoplankton</TabsTrigger>
+          <TabsTrigger value="zooplankton" className="text-xs sm:text-sm">Zooplankton</TabsTrigger>
+          <TabsTrigger value="spatial" className="text-xs sm:text-sm">Spatial</TabsTrigger>
+          <TabsTrigger value="parameters" className="text-xs sm:text-sm">Parameters</TabsTrigger>
         </TabsList>
 
         <TabsContent value="phytoplankton" className="space-y-6">
@@ -104,7 +102,7 @@ export function ResearchDashboardPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {Object.entries(researchParams.phytoplanktonGroups).map(([key, group]) => (
                   <Card key={key}>
                     <CardHeader className="pb-2">
@@ -181,7 +179,7 @@ export function ResearchDashboardPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="space-y-3">
                   <h4 className="font-semibold text-blue-600">Winter Pattern</h4>
                   <p className="text-sm text-muted-foreground">
@@ -221,7 +219,7 @@ export function ResearchDashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <h4 className="font-semibold">Model Performance</h4>
                     <ul className="text-sm space-y-1 text-muted-foreground">

@@ -103,10 +103,10 @@ const credits = [
 
 export function AboutPage() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">About</h1>
-        <p className="text-muted-foreground">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">About</h1>
+        <p className="text-muted-foreground text-sm sm:text-base">
           Learn about the Kinneret BioGeo Lab and our research mission
         </p>
       </div>
@@ -164,7 +164,7 @@ export function AboutPage() {
           <CardTitle>What We Model</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <h4 className="font-medium mb-2">Phytoplankton Groups</h4>
               <ul className="space-y-1 text-sm text-muted-foreground">
@@ -198,7 +198,7 @@ export function AboutPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {glossary.map((item, index) => (
               <div key={index} className="space-y-2">
                 <h4 className="font-medium text-primary">{item.term}</h4>
@@ -242,7 +242,7 @@ export function AboutPage() {
           <CardTitle>Contact & Support</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <h4 className="font-medium mb-2">Research Inquiries</h4>
               <p className="text-sm text-muted-foreground">
