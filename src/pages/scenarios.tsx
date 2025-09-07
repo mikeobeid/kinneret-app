@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Play, RotateCcw, Download } from 'lucide-react'
 import { useDataStore } from '@/store/data-store'
 import { LazyChart } from '@/components/lazy-chart'
-import { FigureFrame } from '@/components/figure-frame'
+import { FigureExportControls } from '@/components/figure-export-controls'
 
 // Mock data for groups and their parameters
 const groups = [
@@ -390,21 +390,44 @@ export function ScenariosPage() {
         {/* Right Column - Results */}
         <div className="space-y-6">
           {/* Results Chart */}
-          <FigureFrame
-            ref={modelResultsRef}
-            title="Model Results"
-            subtitle="12-month biomass simulation results"
-            caption="Simulated biomass under current parameter set; % change vs baseline noted in legend."
-            units="mmol P/m³"
-            source="Lake Kinneret monitoring program"
-            pageName="scenarios"
-            figureKey="model-results"
-            supportsSVG={true}
-          >
-            <div className="w-full h-80">
-              <LazyChart data={resultsData} colors={colors} height={300} />
-            </div>
-          </FigureFrame>
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>Model Results</CardTitle>
+                  <CardDescription>12-month biomass simulation results</CardDescription>
+                </div>
+                <FigureExportControls
+                  elementRef={modelResultsRef}
+                  metadata={{
+                    title: "Model Results",
+                    subtitle: "12-month biomass simulation results",
+                    caption: "Simulated biomass under current parameter set; % change vs baseline noted in legend.",
+                    units: "mmol P/m³",
+                    source: "Lake Kinneret monitoring program",
+                    timestamp: new Date().toISOString(),
+                    appName: "Kinneret BioGeo Lab",
+                    appVersion: "1.0.0"
+                  }}
+                  filename="scenarios-model-results"
+                  pageName="scenarios"
+                  figureKey="model-results"
+                  supportsSVG={true}
+                />
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div ref={modelResultsRef} className="w-full h-80 bg-white border rounded-lg p-4">
+                <LazyChart data={resultsData} colors={colors} height={300} />
+              </div>
+              <div className="mt-4 pt-3 border-t border-muted/50">
+                <div className="text-sm text-muted-foreground space-y-1">
+                  <div className="font-medium">Simulated biomass under current parameter set; % change vs baseline noted in legend.</div>
+                  <div className="text-xs">Units: mmol P/m³</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           {/* Delta vs Baseline */}
           <Card>
