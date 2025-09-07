@@ -2,8 +2,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts'
 import { useDataStore } from '@/store/data-store'
-import { FigureFrame } from '@/components/figure-frame'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { Image, FileText } from 'lucide-react'
 
 const colors = {
   diatoms: '#2563EB',
@@ -15,11 +16,41 @@ const colors = {
 
 export function StatisticsPage() {
   const { timeSeriesData } = useDataStore()
+  const [isExporting, setIsExporting] = useState(false)
   
   // Refs for export
   const temporalTrendsRef = useRef<HTMLDivElement>(null)
   const monthlyTrendsRef = useRef<HTMLDivElement>(null)
   const yearlyDistributionRef = useRef<HTMLDivElement>(null)
+
+  // Export helper function
+  const handleExport = async (elementRef: React.RefObject<HTMLDivElement>, filename: string, format: 'png' | 'svg') => {
+    if (!elementRef.current) return
+    setIsExporting(true)
+    try {
+      const { exportNodeAsPNG, exportNodeAsSVG, downloadBlob } = await import('@/lib/figure/engine')
+      const blob = format === 'png' 
+        ? await exportNodeAsPNG(elementRef.current, {
+            format: 'png',
+            scale: 2,
+            bg: 'light',
+            includeCaption: true,
+            includeMetadata: true
+          })
+        : await exportNodeAsSVG(elementRef.current, {
+            format: 'svg',
+            scale: 1,
+            bg: 'light',
+            includeCaption: true,
+            includeMetadata: true
+          })
+      downloadBlob(blob, `kinneret-statistics-${filename}-light.${format}`)
+    } catch (error) {
+      console.error('Export failed:', error)
+    } finally {
+      setIsExporting(false)
+    }
+  }
   
   // Convert data to chart formats
   const monthlyData = timeSeriesData.map(item => ({
@@ -92,63 +123,97 @@ export function StatisticsPage() {
         </TabsList>
 
         <TabsContent value="temporal" className="space-y-4">
-          <FigureFrame
-            ref={temporalTrendsRef}
-            title="Long-term Trends (2010-2019)"
-            subtitle="Annual biomass trends with 2019 data emphasized"
-            caption="Annual biomass trends by functional group. Units: mmol P/m³."
-            units="mmol P/m³"
-            source="Lake Kinneret monitoring program"
-            pageName="statistics"
-            figureKey="temporal-trends"
-            supportsSVG={true}
-          >
-            <div className="responsive-chart">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={temporalData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="year" />
-                  <YAxis domain={[0, 1]} />
-                  <Tooltip />
-                  <Line 
-                    type="monotone" 
-                    dataKey="diatoms" 
-                    stroke={colors.diatoms} 
-                    strokeWidth={2}
-                    strokeDasharray={temporalData[temporalData.length - 1].year === 2019 ? "0" : "5 5"}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="dinoflagellates" 
-                    stroke={colors.dinoflagellates} 
-                    strokeWidth={2}
-                    strokeDasharray={temporalData[temporalData.length - 1].year === 2019 ? "0" : "5 5"}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="small_phyto" 
-                    stroke={colors.small_phyto} 
-                    strokeWidth={2}
-                    strokeDasharray={temporalData[temporalData.length - 1].year === 2019 ? "0" : "5 5"}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="n_fixers" 
-                    stroke={colors.n_fixers} 
-                    strokeWidth={2}
-                    strokeDasharray={temporalData[temporalData.length - 1].year === 2019 ? "0" : "5 5"}
-                  />
-                  <Line 
-                    type="monotone" 
-                    dataKey="microcystis" 
-                    stroke={colors.microcystis} 
-                    strokeWidth={2}
-                    strokeDasharray={temporalData[temporalData.length - 1].year === 2019 ? "0" : "5 5"}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </FigureFrame>
+          <Card>
+            <CardHeader>
+              <CardTitle>Long-term Trends (2010-2019)</CardTitle>
+              <CardDescription>Annual biomass trends with 2019 data emphasized</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="relative">
+                {/* Export Controls */}
+                <div className="absolute top-2 right-2 z-10">
+                  <div className="bg-white/95 backdrop-blur-sm border rounded-lg shadow-lg p-2">
+                    <div className="flex items-center gap-2">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleExport(temporalTrendsRef, 'temporal-trends', 'png')}
+                        disabled={isExporting}
+                        className="h-8 px-3 text-xs"
+                      >
+                        <Image className="h-3 w-3 mr-1" />
+                        PNG
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleExport(temporalTrendsRef, 'temporal-trends', 'svg')}
+                        disabled={isExporting}
+                        className="h-8 px-3 text-xs"
+                      >
+                        <FileText className="h-3 w-3 mr-1" />
+                        SVG
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Chart Container */}
+                <div ref={temporalTrendsRef} className="w-full h-80 bg-white border rounded-lg p-4">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={temporalData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="year" />
+                      <YAxis domain={[0, 1]} />
+                      <Tooltip />
+                      <Line 
+                        type="monotone" 
+                        dataKey="diatoms" 
+                        stroke={colors.diatoms} 
+                        strokeWidth={2}
+                        strokeDasharray={temporalData[temporalData.length - 1].year === 2019 ? "0" : "5 5"}
+                      />
+                      <Line 
+                        type="monotone" 
+                        dataKey="dinoflagellates" 
+                        stroke={colors.dinoflagellates} 
+                        strokeWidth={2}
+                        strokeDasharray={temporalData[temporalData.length - 1].year === 2019 ? "0" : "5 5"}
+                      />
+                      <Line 
+                        type="monotone" 
+                        dataKey="small_phyto" 
+                        stroke={colors.small_phyto} 
+                        strokeWidth={2}
+                        strokeDasharray={temporalData[temporalData.length - 1].year === 2019 ? "0" : "5 5"}
+                      />
+                      <Line 
+                        type="monotone" 
+                        dataKey="n_fixers" 
+                        stroke={colors.n_fixers} 
+                        strokeWidth={2}
+                        strokeDasharray={temporalData[temporalData.length - 1].year === 2019 ? "0" : "5 5"}
+                      />
+                      <Line 
+                        type="monotone" 
+                        dataKey="microcystis" 
+                        stroke={colors.microcystis} 
+                        strokeWidth={2}
+                        strokeDasharray={temporalData[temporalData.length - 1].year === 2019 ? "0" : "5 5"}
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+              
+              {/* Caption */}
+              <div className="mt-4 pt-3 border-t border-muted/50">
+                <div className="text-sm text-muted-foreground space-y-1">
+                  <div className="font-medium">Annual biomass trends by functional group. Units: mmol P/m³.</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           <Card>
             <CardHeader>
@@ -174,33 +239,67 @@ export function StatisticsPage() {
         </TabsContent>
 
         <TabsContent value="monthly" className="space-y-4">
-          <FigureFrame
-            ref={monthlyTrendsRef}
-            title="Monthly Biomass Patterns"
-            subtitle="Seasonal variations in phytoplankton composition"
-            caption="Monthly composition of phytoplankton functional groups."
-            units="mmol P/m³"
-            source="Lake Kinneret monitoring program"
-            pageName="statistics"
-            figureKey="monthly-trends"
-            supportsSVG={true}
-          >
-            <div className="responsive-chart">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={monthlyData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" />
-                  <YAxis domain={[0, 1]} />
-                  <Tooltip />
-                  <Bar dataKey="diatoms" fill={colors.diatoms} />
-                  <Bar dataKey="dinoflagellates" fill={colors.dinoflagellates} />
-                  <Bar dataKey="small_phyto" fill={colors.small_phyto} />
-                  <Bar dataKey="n_fixers" fill={colors.n_fixers} />
-                  <Bar dataKey="microcystis" fill={colors.microcystis} />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </FigureFrame>
+          <Card>
+            <CardHeader>
+              <CardTitle>Monthly Biomass Patterns</CardTitle>
+              <CardDescription>Seasonal variations in phytoplankton composition</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="relative">
+                {/* Export Controls */}
+                <div className="absolute top-2 right-2 z-10">
+                  <div className="bg-white/95 backdrop-blur-sm border rounded-lg shadow-lg p-2">
+                    <div className="flex items-center gap-2">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleExport(monthlyTrendsRef, 'monthly-trends', 'png')}
+                        disabled={isExporting}
+                        className="h-8 px-3 text-xs"
+                      >
+                        <Image className="h-3 w-3 mr-1" />
+                        PNG
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleExport(monthlyTrendsRef, 'monthly-trends', 'svg')}
+                        disabled={isExporting}
+                        className="h-8 px-3 text-xs"
+                      >
+                        <FileText className="h-3 w-3 mr-1" />
+                        SVG
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Chart Container */}
+                <div ref={monthlyTrendsRef} className="w-full h-80 bg-white border rounded-lg p-4">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={monthlyData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="month" />
+                      <YAxis domain={[0, 1]} />
+                      <Tooltip />
+                      <Bar dataKey="diatoms" fill={colors.diatoms} />
+                      <Bar dataKey="dinoflagellates" fill={colors.dinoflagellates} />
+                      <Bar dataKey="small_phyto" fill={colors.small_phyto} />
+                      <Bar dataKey="n_fixers" fill={colors.n_fixers} />
+                      <Bar dataKey="microcystis" fill={colors.microcystis} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+              
+              {/* Caption */}
+              <div className="mt-4 pt-3 border-t border-muted/50">
+                <div className="text-sm text-muted-foreground space-y-1">
+                  <div className="font-medium">Monthly composition of phytoplankton functional groups. Units: mmol P/m³.</div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           <Card>
             <CardHeader>
@@ -226,101 +325,137 @@ export function StatisticsPage() {
         </TabsContent>
 
         <TabsContent value="yearly" className="space-y-4">
-          <FigureFrame
-            ref={yearlyDistributionRef}
-            title="Annual Distribution Analysis"
-            subtitle="Box plot representation of yearly biomass variations"
-            caption="Yearly distribution (median, IQR, min–max) by group."
-            units="mmol P/m³"
-            source="Lake Kinneret monitoring program"
-            pageName="statistics"
-            figureKey="yearly-distribution"
-            supportsSVG={true}
-          >
-            <div className="space-y-4">
-              {/* Custom Box Plot Visualization */}
-              <div className="space-y-3">
-                {yearlyDistributionData.map((item) => (
-                  <div key={item.group} className="flex items-center gap-4">
-                    <div className="w-32 text-sm font-medium text-right">{item.group}</div>
-                    <div className="flex-1 relative h-8 flex items-center">
-                      {/* Min-Max line */}
-                      <div 
-                        className="absolute h-0.5 bg-gray-400"
-                        style={{ 
-                          left: `${item.min * 100}%`, 
-                          width: `${(item.max - item.min) * 100}%` 
-                        }}
-                      />
-                      {/* Q1-Q3 box */}
-                      <div 
-                        className="absolute h-6 bg-blue-200 border border-blue-400 rounded"
-                        style={{ 
-                          left: `${item.q1 * 100}%`, 
-                          width: `${(item.q3 - item.q1) * 100}%`,
-                          top: '50%',
-                          transform: 'translateY(-50%)'
-                        }}
-                      />
-                      {/* Median line */}
-                      <div 
-                        className="absolute h-6 border-l-2 border-blue-600"
-                        style={{ 
-                          left: `${item.median * 100}%`,
-                          top: '50%',
-                          transform: 'translateY(-50%)'
-                        }}
-                      />
-                      {/* Min marker */}
-                      <div 
-                        className="absolute w-2 h-2 bg-gray-600 rounded-full"
-                        style={{ 
-                          left: `${item.min * 100}%`,
-                          top: '50%',
-                          transform: 'translate(-50%, -50%)'
-                        }}
-                      />
-                      {/* Max marker */}
-                      <div 
-                        className="absolute w-2 h-2 bg-gray-600 rounded-full"
-                        style={{ 
-                          left: `${item.max * 100}%`,
-                          top: '50%',
-                          transform: 'translate(-50%, -50%)'
-                        }}
-                      />
-                      {/* Value labels */}
-                      <div className="absolute -top-6 left-0 text-xs text-gray-500">
-                        {item.min.toFixed(1)}
-                      </div>
-                      <div className="absolute -top-6 right-0 text-xs text-gray-500">
-                        {item.max.toFixed(1)}
-                      </div>
-                    </div>
-                    <div className="w-16 text-xs text-gray-600">
-                      Med: {item.median.toFixed(1)}
+          <Card>
+            <CardHeader>
+              <CardTitle>Annual Distribution Analysis</CardTitle>
+              <CardDescription>Box plot representation of yearly biomass variations</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="relative">
+                {/* Export Controls */}
+                <div className="absolute top-2 right-2 z-10">
+                  <div className="bg-white/95 backdrop-blur-sm border rounded-lg shadow-lg p-2">
+                    <div className="flex items-center gap-2">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleExport(yearlyDistributionRef, 'yearly-distribution', 'png')}
+                        disabled={isExporting}
+                        className="h-8 px-3 text-xs"
+                      >
+                        <Image className="h-3 w-3 mr-1" />
+                        PNG
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => handleExport(yearlyDistributionRef, 'yearly-distribution', 'svg')}
+                        disabled={isExporting}
+                        className="h-8 px-3 text-xs"
+                      >
+                        <FileText className="h-3 w-3 mr-1" />
+                        SVG
+                      </Button>
                     </div>
                   </div>
-                ))}
+                </div>
+                
+                {/* Chart Container */}
+                <div ref={yearlyDistributionRef} className="w-full h-80 bg-white border rounded-lg p-4">
+                  <div className="space-y-4">
+                    {/* Custom Box Plot Visualization */}
+                    <div className="space-y-3">
+                      {yearlyDistributionData.map((item) => (
+                        <div key={item.group} className="flex items-center gap-4">
+                          <div className="w-32 text-sm font-medium text-right">{item.group}</div>
+                          <div className="flex-1 relative h-8 flex items-center">
+                            {/* Min-Max line */}
+                            <div 
+                              className="absolute h-0.5 bg-gray-400"
+                              style={{ 
+                                left: `${item.min * 100}%`, 
+                                width: `${(item.max - item.min) * 100}%` 
+                              }}
+                            />
+                            {/* Q1-Q3 box */}
+                            <div 
+                              className="absolute h-6 bg-blue-200 border border-blue-400 rounded"
+                              style={{ 
+                                left: `${item.q1 * 100}%`, 
+                                width: `${(item.q3 - item.q1) * 100}%`,
+                                top: '50%',
+                                transform: 'translateY(-50%)'
+                              }}
+                            />
+                            {/* Median line */}
+                            <div 
+                              className="absolute h-6 border-l-2 border-blue-600"
+                              style={{ 
+                                left: `${item.median * 100}%`,
+                                top: '50%',
+                                transform: 'translateY(-50%)'
+                              }}
+                            />
+                            {/* Min marker */}
+                            <div 
+                              className="absolute w-2 h-2 bg-gray-600 rounded-full"
+                              style={{ 
+                                left: `${item.min * 100}%`,
+                                top: '50%',
+                                transform: 'translate(-50%, -50%)'
+                              }}
+                            />
+                            {/* Max marker */}
+                            <div 
+                              className="absolute w-2 h-2 bg-gray-600 rounded-full"
+                              style={{ 
+                                left: `${item.max * 100}%`,
+                                top: '50%',
+                                transform: 'translate(-50%, -50%)'
+                              }}
+                            />
+                            {/* Value labels */}
+                            <div className="absolute -top-6 left-0 text-xs text-gray-500">
+                              {item.min.toFixed(1)}
+                            </div>
+                            <div className="absolute -top-6 right-0 text-xs text-gray-500">
+                              {item.max.toFixed(1)}
+                            </div>
+                          </div>
+                          <div className="w-16 text-xs text-gray-600">
+                            Med: {item.median.toFixed(1)}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* Legend */}
+                    <div className="flex items-center gap-6 text-xs text-gray-600">
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-3 bg-blue-200 border border-blue-400 rounded"></div>
+                        <span>Q1-Q3 Range</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-0.5 h-3 bg-blue-600"></div>
+                        <span>Median</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
+                        <span>Min/Max</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               
-              {/* Legend */}
-              <div className="flex items-center gap-6 text-xs text-gray-600">
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-3 bg-blue-200 border border-blue-400 rounded"></div>
-                  <span>Q1-Q3 Range</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-0.5 h-3 bg-blue-600"></div>
-                  <span>Median</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
-                  <span>Min/Max</span>
+              {/* Caption */}
+              <div className="mt-4 pt-3 border-t border-muted/50">
+                <div className="text-sm text-muted-foreground space-y-1">
+                  <div className="font-medium">Yearly distribution (median, IQR, min–max) by group. Units: mmol P/m³.</div>
                 </div>
               </div>
-            </div>
-          </FigureFrame>
+            </CardContent>
+          </Card>
 
           <Card>
             <CardHeader>
