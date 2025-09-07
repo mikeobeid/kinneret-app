@@ -243,181 +243,183 @@ export function ScenariosPage() {
   const seasonalDominance = getSeasonalDominance()
 
   return (
-    <div className="space-y-4 sm:space-y-6">
-      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div className="responsive-space-lg">
+      <header className="responsive-flex-col sm:flex-row sm:items-center sm:justify-between responsive-space-md">
         <div className="min-w-0">
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Scenarios</h1>
-          <p className="text-muted-foreground text-sm sm:text-base">
+          <h1 className="responsive-large-heading font-bold tracking-tight">Scenarios</h1>
+          <p className="text-muted-foreground responsive-text responsive-text-wrap">
             Interactive Kinneret biogeochemical insights — groups, seasons, and nutrient scenarios.
           </p>
         </div>
       </header>
 
-      <div className="grid gap-6 xl:grid-cols-2">
+      <div className="responsive-grid xl:grid-cols-2">
         {/* Left Column - Parameters */}
-        <div className="space-y-6">
-                     {/* Global Nutrients */}
-           <Card>
-             <CardHeader>
-               <CardTitle>Global Nutrient Concentrations</CardTitle>
-               <CardDescription>
-                 Set ambient nutrient levels for the simulation
-               </CardDescription>
-             </CardHeader>
-             <CardContent className="space-y-4">
-               {Object.entries(nutrientValues).map(([nutrient, config]) => (
-                 <div key={nutrient} className="space-y-2">
-                   <div className="flex justify-between items-center">
-                     <label 
-                       htmlFor={`nutrient-${nutrient}`}
-                       className="text-sm font-medium"
-                     >
-                       {nutrient}
-                     </label>
-                     <span 
-                       className="text-sm text-muted-foreground"
-                       aria-live="polite"
-                       aria-label={`Current ${nutrient} value`}
-                     >
-                       {config.value} {config.unit}
-                     </span>
-                   </div>
-                   <Slider
-                     id={`nutrient-${nutrient}`}
-                     value={[config.value]}
-                     onValueChange={([value]) => updateNutrient(nutrient, value)}
-                     min={config.min}
-                     max={config.max}
-                     step={config.step}
-                     className="w-full"
-                     aria-label={`Adjust ${nutrient} concentration from ${config.min} to ${config.max} ${config.unit}`}
-                   />
-                 </div>
-               ))}
-             </CardContent>
-           </Card>
+        <div className="responsive-space-lg">
+          {/* Global Nutrients */}
+          <Card className="responsive-card">
+            <CardHeader className="pb-4">
+              <CardTitle className="responsive-heading">Global Nutrient Concentrations</CardTitle>
+              <CardDescription className="responsive-text">
+                Set ambient nutrient levels for the simulation
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="responsive-space-md">
+              {Object.entries(nutrientValues).map(([nutrient, config]) => (
+                <div key={nutrient} className="responsive-space-sm">
+                  <div className="flex justify-between items-center">
+                    <label 
+                      htmlFor={`nutrient-${nutrient}`}
+                      className="responsive-text font-medium"
+                    >
+                      {nutrient}
+                    </label>
+                    <span 
+                      className="responsive-text text-muted-foreground"
+                      aria-live="polite"
+                      aria-label={`Current ${nutrient} value`}
+                    >
+                      {config.value} {config.unit}
+                    </span>
+                  </div>
+                  <Slider
+                    id={`nutrient-${nutrient}`}
+                    value={[config.value]}
+                    onValueChange={([value]) => updateNutrient(nutrient, value)}
+                    min={config.min}
+                    max={config.max}
+                    step={config.step}
+                    className="w-full"
+                    aria-label={`Adjust ${nutrient} concentration from ${config.min} to ${config.max} ${config.unit}`}
+                  />
+                </div>
+              ))}
+            </CardContent>
+          </Card>
 
-                     {/* Group Parameters */}
-           <Card>
-             <CardHeader>
-               <CardTitle>Phytoplankton Group Parameters</CardTitle>
-               <CardDescription>
-                 Configure growth and nutrient uptake parameters for each group
-               </CardDescription>
-             </CardHeader>
-             <CardContent>
-               <Accordion type="single" collapsible className="w-full">
-                 {groupParams.map((group, groupIndex) => (
-                   <AccordionItem key={group.name} value={group.name}>
-                     <AccordionTrigger 
-                       className="text-sm"
-                       aria-label={`Expand ${group.name} parameters`}
-                     >
-                       {group.name}
-                     </AccordionTrigger>
-                     <AccordionContent className="space-y-4">
-                       {Object.entries(group.params).map(([paramName, config]) => (
-                         <div key={paramName} className="space-y-2">
-                           <div className="flex justify-between items-center">
-                             <div>
-                               <label 
-                                 htmlFor={`${group.name}-${paramName}`}
-                                 className="text-sm font-medium"
-                               >
-                                 {paramName}
-                               </label>
-                               <p className="text-xs text-muted-foreground">{config.description}</p>
-                             </div>
-                             <span 
-                               className="text-sm text-muted-foreground"
-                               aria-live="polite"
-                               aria-label={`Current ${paramName} value`}
-                             >
-                               {config.value}
-                             </span>
-                           </div>
-                           <Slider
-                             id={`${group.name}-${paramName}`}
-                             value={[config.value]}
-                             onValueChange={([value]) => updateGroupParam(groupIndex, paramName, value)}
-                             min={config.min}
-                             max={config.max}
-                             step={config.step}
-                             className="w-full"
-                             aria-label={`Adjust ${paramName} for ${group.name} from ${config.min} to ${config.max}`}
-                           />
-                         </div>
-                       ))}
-                     </AccordionContent>
-                   </AccordionItem>
-                 ))}
-               </Accordion>
-             </CardContent>
-           </Card>
+          {/* Group Parameters */}
+          <Card className="responsive-card">
+            <CardHeader className="pb-4">
+              <CardTitle className="responsive-heading">Phytoplankton Group Parameters</CardTitle>
+              <CardDescription className="responsive-text">
+                Configure growth and nutrient uptake parameters for each group
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Accordion type="single" collapsible className="w-full">
+                {groupParams.map((group, groupIndex) => (
+                  <AccordionItem key={group.name} value={group.name}>
+                    <AccordionTrigger 
+                      className="responsive-text"
+                      aria-label={`Expand ${group.name} parameters`}
+                    >
+                      {group.name}
+                    </AccordionTrigger>
+                    <AccordionContent className="responsive-space-md">
+                      {Object.entries(group.params).map(([paramName, config]) => (
+                        <div key={paramName} className="responsive-space-sm">
+                          <div className="flex justify-between items-center">
+                            <div>
+                              <label 
+                                htmlFor={`${group.name}-${paramName}`}
+                                className="responsive-text font-medium"
+                              >
+                                {paramName}
+                              </label>
+                              <p className="text-xs text-muted-foreground responsive-text-wrap">{config.description}</p>
+                            </div>
+                            <span 
+                              className="responsive-text text-muted-foreground"
+                              aria-live="polite"
+                              aria-label={`Current ${paramName} value`}
+                            >
+                              {config.value}
+                            </span>
+                          </div>
+                          <Slider
+                            id={`${group.name}-${paramName}`}
+                            value={[config.value]}
+                            onValueChange={([value]) => updateGroupParam(groupIndex, paramName, value)}
+                            min={config.min}
+                            max={config.max}
+                            step={config.step}
+                            className="w-full"
+                            aria-label={`Adjust ${paramName} for ${group.name} from ${config.min} to ${config.max}`}
+                          />
+                        </div>
+                      ))}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </CardContent>
+          </Card>
 
-                     {/* Control Buttons */}
-           <div className="flex gap-2" role="group" aria-label="Scenario controls">
-             <Button 
-               onClick={runScenario} 
-               disabled={isRunning} 
-               className="flex-1"
-               aria-label={isRunning ? 'Running scenario simulation' : 'Run scenario simulation'}
-             >
-               <Play className="mr-2 h-4 w-4" />
-               {isRunning ? 'Running...' : 'Run Scenario'}
-             </Button>
-             <Button 
-               onClick={resetToDefaults} 
-               variant="outline"
-               aria-label="Reset all parameters to default values"
-             >
-               <RotateCcw className="mr-2 h-4 w-4" />
-               Reset
-             </Button>
-             <Button 
-               variant="outline" 
-               onClick={exportScenario}
-               aria-label="Export scenario data as JSON file"
-             >
-               <Download className="mr-2 h-4 w-4" />
-               Export
-             </Button>
-           </div>
+          {/* Control Buttons */}
+          <div className="responsive-flex flex-wrap gap-2" role="group" aria-label="Scenario controls">
+            <Button 
+              onClick={runScenario} 
+              disabled={isRunning} 
+              className="flex-1 min-w-[140px] responsive-button"
+              aria-label={isRunning ? 'Running scenario simulation' : 'Run scenario simulation'}
+            >
+              <Play className="mr-2 h-4 w-4" />
+              {isRunning ? 'Running...' : 'Run Scenario'}
+            </Button>
+            <Button 
+              onClick={resetToDefaults} 
+              variant="outline"
+              className="responsive-button"
+              aria-label="Reset all parameters to default values"
+            >
+              <RotateCcw className="mr-2 h-4 w-4" />
+              Reset
+            </Button>
+            <Button 
+              variant="outline" 
+              onClick={exportScenario}
+              className="responsive-button"
+              aria-label="Export scenario data as JSON file"
+            >
+              <Download className="mr-2 h-4 w-4" />
+              Export
+            </Button>
+          </div>
         </div>
 
         {/* Right Column - Results */}
-        <div className="space-y-6">
-                     {/* Results Chart */}
-           <FigureFrame
-             ref={modelResultsRef}
-             title="Model Results"
-             subtitle="12-month biomass simulation results"
-             caption="Simulated biomass under current parameter set; % change vs baseline noted in legend."
-             units="mmol P/m³"
-             source="Lake Kinneret monitoring program"
-             pageName="scenarios"
-             figureKey="model-results"
-             supportsSVG={true}
-           >
-             <div className="h-64 sm:h-80" role="img" aria-label="Phytoplankton biomass simulation chart showing monthly data for five groups">
-               <LazyChart data={resultsData} colors={colors} height={320} />
-             </div>
-           </FigureFrame>
+        <div className="responsive-space-lg">
+          {/* Results Chart */}
+          <FigureFrame
+            ref={modelResultsRef}
+            title="Model Results"
+            subtitle="12-month biomass simulation results"
+            caption="Simulated biomass under current parameter set; % change vs baseline noted in legend."
+            units="mmol P/m³"
+            source="Lake Kinneret monitoring program"
+            pageName="scenarios"
+            figureKey="model-results"
+            supportsSVG={true}
+          >
+            <div className="responsive-chart" role="img" aria-label="Phytoplankton biomass simulation chart showing monthly data for five groups">
+              <LazyChart data={resultsData} colors={colors} height={320} />
+            </div>
+          </FigureFrame>
 
           {/* Delta vs Baseline */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Delta vs Baseline</CardTitle>
-              <CardDescription>
+          <Card className="responsive-card">
+            <CardHeader className="pb-4">
+              <CardTitle className="responsive-heading">Delta vs Baseline</CardTitle>
+              <CardDescription className="responsive-text">
                 Changes from default parameter values
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="space-y-2">
+              <div className="responsive-space-sm">
                 {groupParams.map((group, index) => (
                   <div key={group.name} className="flex justify-between items-center">
-                    <span className="text-sm">{group.name}</span>
-                    <div className="flex gap-1">
+                    <span className="responsive-text">{group.name}</span>
+                    <div className="flex gap-1 flex-wrap">
                       {Object.entries(group.params).map(([paramName, config]) => {
                         const original = groups[index]?.params[paramName as keyof typeof groups[0]['params']]?.value || 0
                         const delta = config.value - original
@@ -443,18 +445,18 @@ export function ScenariosPage() {
           </Card>
 
           {/* Seasonal Dominance */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Dominant Group per Season</CardTitle>
-              <CardDescription>
+          <Card className="responsive-card">
+            <CardHeader className="pb-4">
+              <CardTitle className="responsive-heading">Dominant Group per Season</CardTitle>
+              <CardDescription className="responsive-text">
                 Most abundant phytoplankton group by season
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="responsive-grid grid-cols-1 sm:grid-cols-2">
                 {Object.entries(seasonalDominance).map(([season, groups]) => (
-                  <div key={season} className="space-y-2">
-                    <h4 className="text-sm font-medium capitalize">{season}</h4>
+                  <div key={season} className="responsive-space-sm">
+                    <h4 className="responsive-text font-medium capitalize">{season}</h4>
                     <div className="flex flex-wrap gap-1">
                       {groups.map((group, index) => (
                         <Badge 
