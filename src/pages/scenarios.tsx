@@ -4,7 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Slider } from '@/components/ui/slider'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Play, RotateCcw, Download } from 'lucide-react'
+import { Play, RotateCcw, Download, Image, FileText } from 'lucide-react'
 import { useDataStore } from '@/store/data-store'
 import { LazyChart } from '@/components/lazy-chart'
 import { FigureExportControls } from '@/components/figure-export-controls'
@@ -392,34 +392,85 @@ export function ScenariosPage() {
           {/* Results Chart */}
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle>Model Results</CardTitle>
-                  <CardDescription>12-month biomass simulation results</CardDescription>
-                </div>
-                <FigureExportControls
-                  elementRef={modelResultsRef}
-                  metadata={{
-                    title: "Model Results",
-                    subtitle: "12-month biomass simulation results",
-                    caption: "Simulated biomass under current parameter set; % change vs baseline noted in legend.",
-                    units: "mmol P/m³",
-                    source: "Lake Kinneret monitoring program",
-                    timestamp: new Date().toISOString(),
-                    appName: "Kinneret BioGeo Lab",
-                    appVersion: "1.0.0"
-                  }}
-                  filename="scenarios-model-results"
-                  pageName="scenarios"
-                  figureKey="model-results"
-                  supportsSVG={true}
-                />
-              </div>
+              <CardTitle>Model Results</CardTitle>
+              <CardDescription>12-month biomass simulation results</CardDescription>
             </CardHeader>
             <CardContent>
-              <div ref={modelResultsRef} className="w-full h-80 bg-white border rounded-lg p-4">
-                <LazyChart data={resultsData} colors={colors} height={300} />
+              <div className="relative">
+                {/* Export Controls - Positioned inside chart box */}
+                <div className="absolute top-2 right-2 z-10">
+                  <div className="bg-white/95 backdrop-blur-sm border rounded-lg shadow-lg p-2">
+                    <div className="flex items-center gap-2">
+                      {/* PNG Button */}
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={async () => {
+                          if (!modelResultsRef.current) return
+                          setIsRunning(true)
+                          try {
+                            const { exportNodeAsPNG, downloadBlob, sanitizeFileName } = await import('@/lib/figure/engine')
+                            const blob = await exportNodeAsPNG(modelResultsRef.current, {
+                              format: 'png',
+                              scale: 2,
+                              bg: 'light',
+                              includeCaption: true,
+                              includeMetadata: true
+                            })
+                            downloadBlob(blob, 'kinneret-scenarios-model-results-light.png')
+                          } catch (error) {
+                            console.error('Export failed:', error)
+                          } finally {
+                            setIsRunning(false)
+                          }
+                        }}
+                        disabled={isRunning}
+                        className="h-8 px-3 text-xs"
+                      >
+                        <Image className="h-3 w-3 mr-1" />
+                        PNG
+                      </Button>
+                      
+                      {/* SVG Button */}
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={async () => {
+                          if (!modelResultsRef.current) return
+                          setIsRunning(true)
+                          try {
+                            const { exportNodeAsSVG, downloadBlob, sanitizeFileName } = await import('@/lib/figure/engine')
+                            const blob = await exportNodeAsSVG(modelResultsRef.current, {
+                              format: 'svg',
+                              scale: 1,
+                              bg: 'light',
+                              includeCaption: true,
+                              includeMetadata: true
+                            })
+                            downloadBlob(blob, 'kinneret-scenarios-model-results-light.svg')
+                          } catch (error) {
+                            console.error('Export failed:', error)
+                          } finally {
+                            setIsRunning(false)
+                          }
+                        }}
+                        disabled={isRunning}
+                        className="h-8 px-3 text-xs"
+                      >
+                        <FileText className="h-3 w-3 mr-1" />
+                        SVG
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Chart Container */}
+                <div ref={modelResultsRef} className="w-full h-80 bg-white border rounded-lg p-4">
+                  <LazyChart data={resultsData} colors={colors} height={300} />
+                </div>
               </div>
+              
+              {/* Caption and Metadata */}
               <div className="mt-4 pt-3 border-t border-muted/50">
                 <div className="text-sm text-muted-foreground space-y-1">
                   <div className="font-medium">Simulated biomass under current parameter set; % change vs baseline noted in legend.</div>
