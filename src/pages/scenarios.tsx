@@ -390,17 +390,21 @@ export function ScenariosPage() {
         {/* Right Column - Results */}
         <div className="space-y-6">
           {/* Results Chart */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Model Results</CardTitle>
-              <CardDescription>12-month biomass simulation results</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="w-full h-80">
-                <LazyChart data={resultsData} colors={colors} height={300} />
-              </div>
-            </CardContent>
-          </Card>
+          <FigureFrame
+            ref={modelResultsRef}
+            title="Model Results"
+            subtitle="12-month biomass simulation results"
+            caption="Simulated biomass under current parameter set; % change vs baseline noted in legend."
+            units="mmol P/m³"
+            source="Lake Kinneret monitoring program"
+            pageName="scenarios"
+            figureKey="model-results"
+            supportsSVG={true}
+          >
+            <div className="w-full h-80">
+              <LazyChart data={resultsData} colors={colors} height={300} />
+            </div>
+          </FigureFrame>
 
           {/* Delta vs Baseline */}
           <Card>
