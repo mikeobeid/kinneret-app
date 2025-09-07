@@ -151,6 +151,8 @@ export function ScenariosPage() {
   const [isRunning, setIsRunning] = useState(false)
   const [resultsData, setResultsData] = useState(baseResultsData)
   
+  // Debug: Log the data to see what's happening
+  
   // Refs for export
   const modelResultsRef = useRef<HTMLDivElement>(null)
 
@@ -243,39 +245,39 @@ export function ScenariosPage() {
   const seasonalDominance = getSeasonalDominance()
 
   return (
-    <div className="responsive-space-lg">
-      <header className="responsive-flex-col sm:flex-row sm:items-center sm:justify-between responsive-space-md">
+    <div className="space-y-6">
+      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="min-w-0">
-          <h1 className="responsive-large-heading font-bold tracking-tight">Scenarios</h1>
-          <p className="text-muted-foreground responsive-text responsive-text-wrap">
+          <h1 className="text-3xl font-bold tracking-tight">Scenarios</h1>
+          <p className="text-muted-foreground">
             Interactive Kinneret biogeochemical insights — groups, seasons, and nutrient scenarios.
           </p>
         </div>
       </header>
 
-      <div className="responsive-grid xl:grid-cols-2">
+      <div className="grid gap-6 xl:grid-cols-2">
         {/* Left Column - Parameters */}
-        <div className="responsive-space-lg">
+        <div className="space-y-6">
           {/* Global Nutrients */}
-          <Card className="responsive-card">
-            <CardHeader className="pb-4">
-              <CardTitle className="responsive-heading">Global Nutrient Concentrations</CardTitle>
-              <CardDescription className="responsive-text">
+          <Card>
+            <CardHeader>
+              <CardTitle>Global Nutrient Concentrations</CardTitle>
+              <CardDescription>
                 Set ambient nutrient levels for the simulation
               </CardDescription>
             </CardHeader>
-            <CardContent className="responsive-space-md">
+            <CardContent className="space-y-4">
               {Object.entries(nutrientValues).map(([nutrient, config]) => (
-                <div key={nutrient} className="responsive-space-sm">
+                <div key={nutrient} className="space-y-2">
                   <div className="flex justify-between items-center">
                     <label 
                       htmlFor={`nutrient-${nutrient}`}
-                      className="responsive-text font-medium"
+                      className="text-sm font-medium"
                     >
                       {nutrient}
                     </label>
                     <span 
-                      className="responsive-text text-muted-foreground"
+                      className="text-sm text-muted-foreground"
                       aria-live="polite"
                       aria-label={`Current ${nutrient} value`}
                     >
@@ -298,10 +300,10 @@ export function ScenariosPage() {
           </Card>
 
           {/* Group Parameters */}
-          <Card className="responsive-card">
-            <CardHeader className="pb-4">
-              <CardTitle className="responsive-heading">Phytoplankton Group Parameters</CardTitle>
-              <CardDescription className="responsive-text">
+          <Card>
+            <CardHeader>
+              <CardTitle>Phytoplankton Group Parameters</CardTitle>
+              <CardDescription>
                 Configure growth and nutrient uptake parameters for each group
               </CardDescription>
             </CardHeader>
@@ -310,26 +312,26 @@ export function ScenariosPage() {
                 {groupParams.map((group, groupIndex) => (
                   <AccordionItem key={group.name} value={group.name}>
                     <AccordionTrigger 
-                      className="responsive-text"
+                      className="text-sm"
                       aria-label={`Expand ${group.name} parameters`}
                     >
                       {group.name}
                     </AccordionTrigger>
-                    <AccordionContent className="responsive-space-md">
+                    <AccordionContent className="space-y-4">
                       {Object.entries(group.params).map(([paramName, config]) => (
-                        <div key={paramName} className="responsive-space-sm">
+                        <div key={paramName} className="space-y-2">
                           <div className="flex justify-between items-center">
                             <div>
                               <label 
                                 htmlFor={`${group.name}-${paramName}`}
-                                className="responsive-text font-medium"
+                                className="text-sm font-medium"
                               >
                                 {paramName}
                               </label>
-                              <p className="text-xs text-muted-foreground responsive-text-wrap">{config.description}</p>
+                              <p className="text-xs text-muted-foreground">{config.description}</p>
                             </div>
                             <span 
-                              className="responsive-text text-muted-foreground"
+                              className="text-sm text-muted-foreground"
                               aria-live="polite"
                               aria-label={`Current ${paramName} value`}
                             >
@@ -356,11 +358,11 @@ export function ScenariosPage() {
           </Card>
 
           {/* Control Buttons */}
-          <div className="responsive-flex flex-wrap gap-2" role="group" aria-label="Scenario controls">
+          <div className="flex gap-2 flex-wrap" role="group" aria-label="Scenario controls">
             <Button 
               onClick={runScenario} 
               disabled={isRunning} 
-              className="flex-1 min-w-[140px] responsive-button"
+              className="flex-1 min-w-[140px]"
               aria-label={isRunning ? 'Running scenario simulation' : 'Run scenario simulation'}
             >
               <Play className="mr-2 h-4 w-4" />
@@ -369,7 +371,6 @@ export function ScenariosPage() {
             <Button 
               onClick={resetToDefaults} 
               variant="outline"
-              className="responsive-button"
               aria-label="Reset all parameters to default values"
             >
               <RotateCcw className="mr-2 h-4 w-4" />
@@ -378,7 +379,6 @@ export function ScenariosPage() {
             <Button 
               variant="outline" 
               onClick={exportScenario}
-              className="responsive-button"
               aria-label="Export scenario data as JSON file"
             >
               <Download className="mr-2 h-4 w-4" />
@@ -388,37 +388,33 @@ export function ScenariosPage() {
         </div>
 
         {/* Right Column - Results */}
-        <div className="responsive-space-lg">
+        <div className="space-y-6">
           {/* Results Chart */}
-          <FigureFrame
-            ref={modelResultsRef}
-            title="Model Results"
-            subtitle="12-month biomass simulation results"
-            caption="Simulated biomass under current parameter set; % change vs baseline noted in legend."
-            units="mmol P/m³"
-            source="Lake Kinneret monitoring program"
-            pageName="scenarios"
-            figureKey="model-results"
-            supportsSVG={true}
-          >
-            <div className="responsive-chart" role="img" aria-label="Phytoplankton biomass simulation chart showing monthly data for five groups">
-              <LazyChart data={resultsData} colors={colors} height={320} />
-            </div>
-          </FigureFrame>
+          <Card>
+            <CardHeader>
+              <CardTitle>Model Results</CardTitle>
+              <CardDescription>12-month biomass simulation results</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="w-full h-80">
+                <LazyChart data={resultsData} colors={colors} height={300} />
+              </div>
+            </CardContent>
+          </Card>
 
           {/* Delta vs Baseline */}
-          <Card className="responsive-card">
-            <CardHeader className="pb-4">
-              <CardTitle className="responsive-heading">Delta vs Baseline</CardTitle>
-              <CardDescription className="responsive-text">
+          <Card>
+            <CardHeader>
+              <CardTitle>Delta vs Baseline</CardTitle>
+              <CardDescription>
                 Changes from default parameter values
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="responsive-space-sm">
+              <div className="space-y-2">
                 {groupParams.map((group, index) => (
                   <div key={group.name} className="flex justify-between items-center">
-                    <span className="responsive-text">{group.name}</span>
+                    <span className="text-sm">{group.name}</span>
                     <div className="flex gap-1 flex-wrap">
                       {Object.entries(group.params).map(([paramName, config]) => {
                         const original = groups[index]?.params[paramName as keyof typeof groups[0]['params']]?.value || 0
@@ -445,18 +441,18 @@ export function ScenariosPage() {
           </Card>
 
           {/* Seasonal Dominance */}
-          <Card className="responsive-card">
-            <CardHeader className="pb-4">
-              <CardTitle className="responsive-heading">Dominant Group per Season</CardTitle>
-              <CardDescription className="responsive-text">
+          <Card>
+            <CardHeader>
+              <CardTitle>Dominant Group per Season</CardTitle>
+              <CardDescription>
                 Most abundant phytoplankton group by season
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="responsive-grid grid-cols-1 sm:grid-cols-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {Object.entries(seasonalDominance).map(([season, groups]) => (
-                  <div key={season} className="responsive-space-sm">
-                    <h4 className="responsive-text font-medium capitalize">{season}</h4>
+                  <div key={season} className="space-y-2">
+                    <h4 className="text-sm font-medium capitalize">{season}</h4>
                     <div className="flex flex-wrap gap-1">
                       {groups.map((group, index) => (
                         <Badge 
