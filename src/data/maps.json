@@ -1,0 +1,59 @@
+{
+  "lake": "Kinneret",
+  "bbox": [32.65, 35.55, 32.95, 35.65],
+  "rasters": [
+    {
+      "id": "winter",
+      "title": "Winter biomass",
+      "url": "/maps/kinneret_biomass_winter.svg"
+    },
+    {
+      "id": "summer", 
+      "title": "Summer biomass",
+      "url": "/maps/kinneret_biomass_summer.svg"
+    }
+  ],
+  "legend": {
+    "min": 0.0,
+    "max": 0.045,
+    "units": "mmol P/m³",
+    "winterMax": 0.045,
+    "summerMax": 0.015,
+    "description": "Total phytoplankton biomass in fixed phosphorus values per m³"
+  },
+  "spatialPatterns": {
+    "winter": {
+      "description": "High biomass concentration in center of Lake Kinneret",
+      "maxConcentration": 0.045,
+      "pattern": "Central concentration due to winter circulation patterns"
+    },
+    "summer": {
+      "description": "High biomass concentration along coast due to westerly winds",
+      "maxConcentration": 0.015,
+      "pattern": "Coastal concentration due to westerly winds driving currents and internal waves"
+    }
+  },
+  "stations": [
+    {
+      "id": "A",
+      "name": "Station A",
+      "position": [32.80, 35.60],
+      "group": "Diatom",
+      "intensity": 0.023
+    },
+    {
+      "id": "B", 
+      "name": "Station B",
+      "position": [32.90, 35.60],
+      "group": "Dinoflagellate",
+      "intensity": 0.031
+    },
+    {
+      "id": "C",
+      "name": "Station C", 
+      "position": [32.70, 35.60],
+      "group": "Small Phytoplankton",
+      "intensity": 0.018
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0F172A"/>
+  
+  <!-- Header -->
+  <rect width="1200" height="80" fill="#10B981"/>
+  <text x="60" y="50" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">
+    Kinneret BioGeo Lab
+  </text>
+  <text x="60" y="75" font-family="Arial, sans-serif" font-size="16" fill="white" opacity="0.9">
+    3D Biogeochemical Model
+  </text>
+  
+  <!-- Main Content -->
+  <text x="60" y="150" font-family="Arial, sans-serif" font-size="24" font-weight="600" fill="white">
+    Interactive Kinneret biogeochemical insights
+  </text>
+  <text x="60" y="180" font-family="Arial, sans-serif" font-size="18" fill="white" opacity="0.8">
+    Groups, seasons, and nutrient scenarios
+  </text>
+  
+  <!-- Features -->
+  <text x="60" y="250" font-family="Arial, sans-serif" font-size="16" fill="white">
+    • Real-time phytoplankton monitoring
+  </text>
+  <text x="60" y="280" font-family="Arial, sans-serif" font-size="16" fill="white">
+    • Interactive 3D modeling
+  </text>
+  <text x="60" y="310" font-family="Arial, sans-serif" font-size="16" fill="white">
+    • Scenario analysis
+  </text>
+  <text x="60" y="340" font-family="Arial, sans-serif" font-size="16" fill="white">
+    • Lake Kinneret data visualization
+  </text>
+  
+  <!-- Lake Kinneret representation -->
+  <ellipse cx="900" cy="300" rx="120" ry="60" fill="#3B82F6" opacity="0.3"/>
+  <ellipse cx="900" cy="300" rx="100" ry="50" fill="#60A5FA" opacity="0.6"/>
+  <text x="900" y="400" font-family="Arial, sans-serif" font-size="14" fill="white" text-anchor="middle">
+    Lake Kinneret
+  </text>
+  
+  <!-- Data points -->
+  <circle cx="850" cy="280" r="4" fill="#10B981"/>
+  <circle cx="900" cy="300" r="4" fill="#F59E0B"/>
+  <circle cx="950" cy="320" r="4" fill="#EF4444"/>
+  
+  <!-- Footer -->
+  <text x="60" y="580" font-family="Arial, sans-serif" font-size="14" fill="white" opacity="0.6">
+    Demo data. Calibrate with 2019 Kinneret monitoring when available.
+  </text>
+</svg>

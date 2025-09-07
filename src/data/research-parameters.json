@@ -1,0 +1,109 @@
+{
+  "phytoplanktonGroups": {
+    "diatom": {
+      "name": "Diatom",
+      "hebrewName": "דיאטום",
+      "mu": { "value": 0.4, "min": 0.1, "max": 0.8, "unit": "1/d", "description": "Maximal growth rate per day" },
+      "rnp": { "value": 16, "min": 10, "max": 20, "unit": "mol/mol", "description": "Nitrogen to Phosphorus ratio" },
+      "rfep": { "value": 1, "min": 0.5, "max": 2, "unit": "mol/mol", "description": "Iron to Phosphorus ratio" },
+      "rsip": { "value": 16, "min": 10, "max": 20, "unit": "mol/mol", "description": "Silica to Phosphorus ratio" },
+      "ksP": { "value": 0.035, "min": 0.01, "max": 0.1, "unit": "μM P", "description": "Phosphorus half-saturation constant" },
+      "ksN": { "value": 0.56, "min": 0.1, "max": 1.0, "unit": "μM N", "description": "Nitrogen half-saturation constant" },
+      "ksFe": { "value": 0.035, "min": 0.01, "max": 0.1, "unit": "μM Fe", "description": "Iron half-saturation constant" },
+      "seasonalPattern": "Spring and autumn blooms",
+      "depthRange": "Upper 20m",
+      "maxConcentration": 0.05,
+      "unit": "mmol P/m³"
+    },
+    "dinoflagellates": {
+      "name": "Dinoflagellates", 
+      "hebrewName": "דינופלגלטים",
+      "mu": { "value": 0.4, "min": 0.1, "max": 0.8, "unit": "1/d", "description": "Maximal growth rate per day" },
+      "rnp": { "value": 16, "min": 10, "max": 20, "unit": "mol/mol", "description": "Nitrogen to Phosphorus ratio" },
+      "rfep": { "value": 1, "min": 0.5, "max": 2, "unit": "mol/mol", "description": "Iron to Phosphorus ratio" },
+      "rsip": { "value": 0, "min": 0, "max": 5, "unit": "mol/mol", "description": "Silica to Phosphorus ratio (no silica requirement)" },
+      "ksP": { "value": 0.035, "min": 0.01, "max": 0.1, "unit": "μM P", "description": "Phosphorus half-saturation constant" },
+      "ksN": { "value": 0.56, "min": 0.1, "max": 1.0, "unit": "μM N", "description": "Nitrogen half-saturation constant" },
+      "ksFe": { "value": 0.035, "min": 0.01, "max": 0.1, "unit": "μM Fe", "description": "Iron half-saturation constant" },
+      "seasonalPattern": "Winter/early spring and late summer/autumn blooms",
+      "depthRange": "Upper 20m",
+      "maxConcentration": 0.05,
+      "unit": "mmol P/m³"
+    },
+    "small_phyto": {
+      "name": "Small Phytoplankton",
+      "hebrewName": "פיטופלנקטון קטן",
+      "mu": { "value": 0.7, "min": 0.3, "max": 1.2, "unit": "1/d", "description": "Maximal growth rate per day" },
+      "rnp": { "value": 16, "min": 10, "max": 20, "unit": "mol/mol", "description": "Nitrogen to Phosphorus ratio" },
+      "rfep": { "value": 1, "min": 0.5, "max": 2, "unit": "mol/mol", "description": "Iron to Phosphorus ratio" },
+      "rsip": { "value": 0, "min": 0, "max": 5, "unit": "mol/mol", "description": "Silica to Phosphorus ratio (no silica requirement)" },
+      "ksP": { "value": 0.015, "min": 0.005, "max": 0.05, "unit": "μM P", "description": "Phosphorus half-saturation constant" },
+      "ksN": { "value": 0.24, "min": 0.1, "max": 0.5, "unit": "μM N", "description": "Nitrogen half-saturation constant" },
+      "ksFe": { "value": 0.015, "min": 0.005, "max": 0.05, "unit": "μM Fe", "description": "Iron half-saturation constant" },
+      "seasonalPattern": "Year-round with peaks in spring and summer",
+      "depthRange": "Upper 20m",
+      "maxConcentration": 0.01,
+      "unit": "mmol P/m³"
+    },
+    "n_fixers": {
+      "name": "N-fixing Cyanobacteria",
+      "hebrewName": "ציאנובקטריה מקבעת חנקן",
+      "mu": { "value": 0.7, "min": 0.3, "max": 1.2, "unit": "1/d", "description": "Maximal growth rate per day" },
+      "rnp": { "value": 16, "min": 10, "max": 20, "unit": "mol/mol", "description": "Nitrogen to Phosphorus ratio" },
+      "rfep": { "value": 1, "min": 0.5, "max": 2, "unit": "mol/mol", "description": "Iron to Phosphorus ratio" },
+      "rsip": { "value": 0, "min": 0, "max": 5, "unit": "mol/mol", "description": "Silica to Phosphorus ratio (no silica requirement)" },
+      "ksP": { "value": 0.01, "min": 0.005, "max": 0.03, "unit": "μM P", "description": "Phosphorus half-saturation constant" },
+      "ksN": { "value": 0.16, "min": 0.05, "max": 0.3, "unit": "μM N", "description": "Nitrogen half-saturation constant" },
+      "ksFe": { "value": 0.01, "min": 0.005, "max": 0.03, "unit": "μM Fe", "description": "Iron half-saturation constant" },
+      "seasonalPattern": "Summer bloom (July-September)",
+      "depthRange": "Upper 20m",
+      "maxConcentration": 0.004,
+      "unit": "mmol P/m³"
+    },
+    "microcystis": {
+      "name": "Microcystis",
+      "hebrewName": "מיקרוציסטיס",
+      "mu": { "value": 0.7, "min": 0.3, "max": 1.2, "unit": "1/d", "description": "Maximal growth rate per day" },
+      "rnp": { "value": 16, "min": 10, "max": 20, "unit": "mol/mol", "description": "Nitrogen to Phosphorus ratio" },
+      "rfep": { "value": 1, "min": 0.5, "max": 2, "unit": "mol/mol", "description": "Iron to Phosphorus ratio" },
+      "rsip": { "value": 0, "min": 0, "max": 5, "unit": "mol/mol", "description": "Silica to Phosphorus ratio (no silica requirement)" },
+      "ksP": { "value": 0.01, "min": 0.005, "max": 0.03, "unit": "μM P", "description": "Phosphorus half-saturation constant" },
+      "ksN": { "value": 0.16, "min": 0.05, "max": 0.3, "unit": "μM N", "description": "Nitrogen half-saturation constant" },
+      "ksFe": { "value": 0.01, "min": 0.005, "max": 0.03, "unit": "μM Fe", "description": "Iron half-saturation constant" },
+      "seasonalPattern": "Winter bloom (March-May), appears earlier in model",
+      "depthRange": "Upper 20m",
+      "maxConcentration": 0.05,
+      "unit": "mmol P/m³"
+    }
+  },
+  "zooplanktonGroups": {
+    "herbivores": {
+      "name": "Herbivorous Zooplankton",
+      "hebrewName": "זואופלנקטון צמחוני",
+      "seasonalPattern": "Peak in spring-summer (May-October)",
+      "maxConcentration": 4,
+      "unit": "mmol C/m³",
+      "depthRange": "Upper 20m"
+    },
+    "predatory": {
+      "name": "Predatory Zooplankton", 
+      "hebrewName": "זואופלנקטון טורף",
+      "seasonalPattern": "Peak in winter-early spring (January-April)",
+      "maxConcentration": 6,
+      "unit": "mmol C/m³",
+      "depthRange": "Upper 20m"
+    }
+  },
+  "spatialPatterns": {
+    "winter": {
+      "description": "High biomass concentration in center of Lake Kinneret",
+      "maxConcentration": 0.045,
+      "unit": "mmol P/m³"
+    },
+    "summer": {
+      "description": "High biomass concentration along coast due to westerly winds",
+      "maxConcentration": 0.015,
+      "unit": "mmol P/m³"
+    }
+  }
+}

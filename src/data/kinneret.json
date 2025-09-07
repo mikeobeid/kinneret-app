@@ -1,0 +1,172 @@
+{
+  "groups": {
+    "diatom": {
+      "mu": 0.4,
+      "Rnp": 16,
+      "Rfep": 1,
+      "Rsip": 16,
+      "KsP": 0.035,
+      "KsN": 0.56,
+      "KsFe": 0.035
+    },
+    "dinoflagellates": {
+      "mu": 0.4,
+      "Rnp": 16,
+      "Rfep": 1,
+      "Rsip": 0,
+      "KsP": 0.056,
+      "KsN": 0.4,
+      "KsFe": 0.035
+    },
+    "small_phyto": {
+      "mu": 0.4,
+      "Rnp": 16,
+      "Rfep": 1,
+      "Rsip": 0,
+      "KsP": 0.035,
+      "KsN": 0.16,
+      "KsFe": 0.01
+    },
+    "n_fixers": {
+      "mu": 0.7,
+      "Rnp": 1,
+      "Rfep": 0,
+      "Rsip": 0,
+      "KsP": 0.016,
+      "KsN": 0.0,
+      "KsFe": 0.01
+    },
+    "microcystis": {
+      "mu": 0.7,
+      "Rnp": 16,
+      "Rfep": 0,
+      "Rsip": 0,
+      "KsP": 0.016,
+      "KsN": 0.16,
+      "KsFe": 0.01
+    }
+  },
+  "timeseries": [
+    {
+      "date": "2019-01-01",
+      "diatom": 0.045,
+      "dinoflagellates": 0.012,
+      "small_phyto": 0.023,
+      "n_fixers": 0.008,
+      "microcystis": 0.003
+    },
+    {
+      "date": "2019-02-01",
+      "diatom": 0.052,
+      "dinoflagellates": 0.015,
+      "small_phyto": 0.028,
+      "n_fixers": 0.006,
+      "microcystis": 0.002
+    },
+    {
+      "date": "2019-03-01",
+      "diatom": 0.048,
+      "dinoflagellates": 0.018,
+      "small_phyto": 0.031,
+      "n_fixers": 0.009,
+      "microcystis": 0.004
+    },
+    {
+      "date": "2019-04-01",
+      "diatom": 0.038,
+      "dinoflagellates": 0.022,
+      "small_phyto": 0.035,
+      "n_fixers": 0.012,
+      "microcystis": 0.007
+    },
+    {
+      "date": "2019-05-01",
+      "diatom": 0.025,
+      "dinoflagellates": 0.028,
+      "small_phyto": 0.042,
+      "n_fixers": 0.018,
+      "microcystis": 0.012
+    },
+    {
+      "date": "2019-06-01",
+      "diatom": 0.018,
+      "dinoflagellates": 0.032,
+      "small_phyto": 0.038,
+      "n_fixers": 0.025,
+      "microcystis": 0.022
+    },
+    {
+      "date": "2019-07-01",
+      "diatom": 0.012,
+      "dinoflagellates": 0.028,
+      "small_phyto": 0.035,
+      "n_fixers": 0.032,
+      "microcystis": 0.035
+    },
+    {
+      "date": "2019-08-01",
+      "diatom": 0.008,
+      "dinoflagellates": 0.025,
+      "small_phyto": 0.032,
+      "n_fixers": 0.028,
+      "microcystis": 0.042
+    },
+    {
+      "date": "2019-09-01",
+      "diatom": 0.015,
+      "dinoflagellates": 0.022,
+      "small_phyto": 0.038,
+      "n_fixers": 0.022,
+      "microcystis": 0.038
+    },
+    {
+      "date": "2019-10-01",
+      "diatom": 0.028,
+      "dinoflagellates": 0.018,
+      "small_phyto": 0.035,
+      "n_fixers": 0.015,
+      "microcystis": 0.025
+    },
+    {
+      "date": "2019-11-01",
+      "diatom": 0.035,
+      "dinoflagellates": 0.015,
+      "small_phyto": 0.032,
+      "n_fixers": 0.012,
+      "microcystis": 0.015
+    },
+    {
+      "date": "2019-12-01",
+      "diatom": 0.042,
+      "dinoflagellates": 0.012,
+      "small_phyto": 0.028,
+      "n_fixers": 0.008,
+      "microcystis": 0.008
+    }
+  ],
+  "spatial": [
+    {
+      "season": "winter",
+      "url": "/maps/winter_biomass.png",
+      "min": 0.0,
+      "max": 0.045
+    },
+    {
+      "season": "summer",
+      "url": "/maps/summer_biomass.png",
+      "min": 0.0,
+      "max": 0.045
+    }
+  ],
+  "nutrients": {
+    "P": 0.1,
+    "N": 0.1,
+    "Fe": 0.01,
+    "Si": 1.0
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdated": "2024-12-19T18:30:00Z",
+    "description": "Kinneret Lake phytoplankton data - 2019 time series with functional group parameters"
+  }
+}
