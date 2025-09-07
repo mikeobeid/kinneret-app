@@ -4,7 +4,7 @@
 :root {
   /* Ensure proper viewport scaling */
   --viewport-width: 100vw;
-  --viewport-height: 100vh;
+  --viewport-height: 100dvh;
   
   /* Responsive font scaling */
   --font-scale: clamp(0.875rem, 2.5vw, 1rem);
