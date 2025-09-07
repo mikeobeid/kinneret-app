@@ -43,14 +43,14 @@ export function HomePage() {
   ]
 
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="responsive-space-y-lg">
       {/* Hero Section */}
-      <section className="text-center space-y-4 sm:space-y-6 py-8 sm:py-12">
-        <div className="space-y-3 sm:space-y-4">
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
+      <section className="text-center responsive-space-y py-8 sm:py-12">
+        <div className="responsive-space-y">
+          <h1 className="responsive-large-heading font-bold tracking-tight text-foreground">
             Kinneret 3D Biogeochemical Model
           </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
+          <p className="responsive-text text-muted-foreground max-w-2xl mx-auto px-4">
             Interactive Kinneret biogeochemical insights — groups, seasons, and nutrient scenarios.
           </p>
         </div>
@@ -74,7 +74,7 @@ export function HomePage() {
       {/* KPI Cards */}
       <section>
         <h2 className="text-2xl font-semibold mb-6">Key Performance Indicators</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="responsive-grid">
           {kpis.map((kpi) => {
             const Icon = kpi.icon
             return (

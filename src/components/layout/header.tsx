@@ -12,21 +12,21 @@ export function Header({ onMenuToggle }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-3 sm:px-4">
-        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+      <div className="responsive-container flex h-16 items-center justify-between">
+        <div className="responsive-flex min-w-0">
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden flex-shrink-0"
+            className="md:hidden flex-shrink-0 responsive-button"
             onClick={onMenuToggle}
           >
             <Menu className="h-5 w-5" />
           </Button>
-          <div className="flex items-center gap-2 min-w-0">
+          <div className="responsive-flex min-w-0">
             <span className="text-xl sm:text-2xl flex-shrink-0">🦠</span>
             <div className="min-w-0">
-              <h1 className="text-sm sm:text-lg font-bold text-primary truncate">Kinneret BioGeo Lab</h1>
-              <p className="text-xs text-muted-foreground hidden sm:block">3D Biogeochemical Model</p>
+              <h1 className="responsive-heading font-bold text-primary responsive-text-truncate">Kinneret BioGeo Lab</h1>
+              <p className="responsive-text text-muted-foreground hidden sm:block">3D Biogeochemical Model</p>
             </div>
           </div>
         </div>

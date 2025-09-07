@@ -10,6 +10,18 @@ export default {
   		screens: {
   			'xs': '475px',
   		},
+  		spacing: {
+  			'responsive-xs': 'var(--spacing-xs)',
+  			'responsive-sm': 'var(--spacing-sm)',
+  			'responsive-md': 'var(--spacing-md)',
+  			'responsive-lg': 'var(--spacing-lg)',
+  			'responsive-xl': 'var(--spacing-xl)',
+  		},
+  		fontSize: {
+  			'responsive': 'var(--font-scale)',
+  			'responsive-heading': 'var(--heading-scale)',
+  			'responsive-large': 'var(--large-heading-scale)',
+  		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',

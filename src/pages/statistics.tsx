@@ -103,7 +103,7 @@ export function StatisticsPage() {
             figureKey="temporal-trends"
             supportsSVG={true}
           >
-            <div className="h-64 sm:h-80 lg:h-96">
+            <div className="responsive-chart">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={temporalData}>
                   <CartesianGrid strokeDasharray="3 3" />
@@ -185,7 +185,7 @@ export function StatisticsPage() {
             figureKey="monthly-trends"
             supportsSVG={true}
           >
-            <div className="h-64 sm:h-80 lg:h-96">
+            <div className="responsive-chart">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={monthlyData}>
                   <CartesianGrid strokeDasharray="3 3" />
