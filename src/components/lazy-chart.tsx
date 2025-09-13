@@ -40,12 +40,12 @@ export function LazyChart({ data, colors, height = 300 }: LazyChartProps) {
   return (
     <Suspense fallback={<Skeleton className="w-full" style={{ height: `${height}px` }} />}>
       <LazyResponsiveContainer width="100%" height={height}>
-        <LazyLineChart data={data}>
+        <LazyLineChart data={data} margin={{ top: 20, right: 30, left: 60, bottom: 20 }}>
           <LazyCartesianGrid strokeDasharray="3 3" />
           <LazyXAxis dataKey="month" />
           <LazyYAxis 
             domain={[0, 1]} 
-            label={{ value: 'Biomass (mmol P/m³)', angle: -90, position: 'insideLeft' }}
+            label={{ value: 'Biomass (mmol P/m³)', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle', dy: 10 } }}
           />
           <LazyTooltip />
           <LazyLine type="monotone" dataKey="diatoms" stroke={colors.diatoms} strokeWidth={2} />

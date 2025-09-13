@@ -31,9 +31,9 @@ export interface FigureSize {
 }
 
 export const FIGURE_SIZES = {
-  small: { width: 1200, height: 800 },
+  small: { width: 1280, height: 800 },
   medium: { width: 1600, height: 1000 },
-  large: { width: 2000, height: 1200 }
+  large: { width: 2400, height: 1500 }
 } as const
 
 export type ThemeStyle = {

@@ -1,0 +1,25 @@
+/* LiveKinneret Map Component Styles */
+.kinneret-map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.kinneret-map .maplibregl-map {
+  width: 100%;
+  height: 100%;
+}
+
+.control-placeholder {
+  padding: 20px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Ensure map container takes full space */
+.kinneret-map .map-container {
+  width: 100%;
+  height: 100%;
+}

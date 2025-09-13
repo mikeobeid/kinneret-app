@@ -81,8 +81,9 @@ export function ZooplanktonChart({ title, description }: ZooplanktonChartProps) 
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
                   <YAxis 
-                    label={{ value: 'mmol C/m³', angle: -90, position: 'insideLeft' }}
+                    label={{ value: 'mmol C/m³', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle' } }}
                     domain={[0, 'dataMax + 0.5']}
+                    width={80}
                   />
                   <Tooltip 
                     formatter={(value: number, name: string) => [
@@ -120,8 +121,9 @@ export function ZooplanktonChart({ title, description }: ZooplanktonChartProps) 
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
                   <YAxis 
-                    label={{ value: '#/L (counts per liter)', angle: -90, position: 'insideLeft' }}
+                    label={{ value: '#/L (counts per liter)', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle' } }}
                     domain={[0, 'dataMax + 50']}
+                    width={80}
                   />
                   <Tooltip 
                     formatter={(value: number, name: string) => [
@@ -157,8 +159,9 @@ export function ZooplanktonChart({ title, description }: ZooplanktonChartProps) 
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
                   <YAxis 
-                    label={{ value: 'Normalized Concentration', angle: -90, position: 'insideLeft' }}
+                    label={{ value: 'Normalized Concentration', angle: -90, position: 'insideLeft', style: { textAnchor: 'middle' } }}
                     domain={[0, 5]}
+                    width={80}
                   />
                   <Tooltip 
                     formatter={(value: number, name: string) => {

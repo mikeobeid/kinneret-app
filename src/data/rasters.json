@@ -1,0 +1,22 @@
+[
+  {
+    "id": "temp_winter",
+    "season": "Winter",
+    "min": 10,
+    "max": 20,
+    "units": "°C",
+    "colorbar": "turbo",
+    "url": "/rasters/temp_winter.png",
+    "description": "Winter temperature distribution in Lake Kinneret"
+  },
+  {
+    "id": "temp_summer",
+    "season": "Summer", 
+    "min": 20,
+    "max": 30,
+    "units": "°C",
+    "colorbar": "turbo",
+    "url": "/rasters/temp_summer.png",
+    "description": "Summer temperature distribution in Lake Kinneret"
+  }
+]

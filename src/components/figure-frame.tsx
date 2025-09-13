@@ -14,6 +14,11 @@ interface FigureFrameProps {
   children: React.ReactNode
   supportsSVG?: boolean
   className?: string
+  researchOptions?: {
+    groupId?: string
+    month?: number
+    season?: 'winter' | 'summer'
+  }
 }
 
 export const FigureFrame = forwardRef<HTMLDivElement, FigureFrameProps>(({
@@ -26,7 +31,8 @@ export const FigureFrame = forwardRef<HTMLDivElement, FigureFrameProps>(({
   figureKey,
   children,
   supportsSVG = true,
-  className = ''
+  className = '',
+  researchOptions
 }, ref) => {
   
   const metadata: FigureMetadata = {
@@ -43,27 +49,25 @@ export const FigureFrame = forwardRef<HTMLDivElement, FigureFrameProps>(({
   const filename = `${pageName}-${figureKey}`
 
   return (
-    <Card className={`relative responsive-card ${className}`}>
+    <Card className={`relative ${className}`}>
       <CardHeader className="pb-3">
-        <div className="responsive-flex-col sm:flex-row sm:items-start sm:justify-between">
-          <div className="flex-1 min-w-0">
-            <CardTitle className="responsive-heading responsive-text-wrap">{title}</CardTitle>
-            {subtitle && (
-              <CardDescription className="mt-1 responsive-text responsive-text-wrap">{subtitle}</CardDescription>
-            )}
-          </div>
-          
-          {/* Export Controls */}
-          <div className="flex-shrink-0">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-lg font-semibold">{title}</CardTitle>
+            {/* Export Controls */}
             <FigureExportControls
-              elementRef={ref}
+              elementRef={ref as React.RefObject<HTMLElement>}
               metadata={metadata}
               filename={filename}
               pageName={pageName}
               figureKey={figureKey}
               supportsSVG={supportsSVG}
+              researchOptions={researchOptions}
             />
           </div>
+          {subtitle && (
+            <CardDescription className="text-sm text-muted-foreground">{subtitle}</CardDescription>
+          )}
         </div>
       </CardHeader>
       
@@ -71,7 +75,7 @@ export const FigureFrame = forwardRef<HTMLDivElement, FigureFrameProps>(({
         {/* Main Figure Content */}
         <div 
           ref={ref}
-          className="relative overflow-x-auto responsive-chart"
+          className="relative w-full"
         >
           {children}
         </div>

@@ -1,16 +1,10 @@
 import React, { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { BarChart3, Activity, Grid3X3 } from 'lucide-react'
+import { BarChart3, Grid3X3 } from 'lucide-react'
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts'
 
 
-interface DepthProfileChartProps {
-  title: string
-  description: string
-}
-
-export function DepthProfileChart({ title, description }: DepthProfileChartProps) {
+export function DepthProfileChart() {
   const [selectedGroup, setSelectedGroup] = useState('diatoms')
   const [viewMode, setViewMode] = useState<'heatmap' | 'profile'>('heatmap')
 
@@ -137,15 +131,7 @@ export function DepthProfileChart({ title, description }: DepthProfileChartProps
   const heatmapData = generateHeatmapData()
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Activity className="h-5 w-5" />
-          {title}
-        </CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <div className="space-y-2">
         {/* Group Selection */}
         <div className="flex flex-wrap gap-2">
           {groups.map((group) => (
@@ -188,10 +174,10 @@ export function DepthProfileChart({ title, description }: DepthProfileChartProps
         </div>
 
         {/* Chart Area */}
-        <div className="h-96 border rounded-lg p-4 bg-muted/20">
+        <div className="h-[70vh] border rounded-lg p-4 bg-muted/20">
           {viewMode === 'heatmap' ? (
             <div className="h-full">
-              <div className="text-center mb-4">
+              <div className="text-center mb-2">
                 <div className="text-lg font-medium">
                   {selectedGroupData?.name} Depth-Time Heatmap
                 </div>
@@ -265,7 +251,7 @@ export function DepthProfileChart({ title, description }: DepthProfileChartProps
             </div>
           ) : (
             <div className="h-full">
-              <div className="text-center mb-4">
+              <div className="text-center mb-2">
                 <div className="text-lg font-medium">
                   {selectedGroupData?.name} Depth Profile
                 </div>
@@ -314,7 +300,6 @@ export function DepthProfileChart({ title, description }: DepthProfileChartProps
           <div><strong>Depth Range:</strong> Primarily upper 20m of water column</div>
           <div><strong>Data Source:</strong> Lake Kinneret monitoring program, Station A</div>
         </div>
-      </CardContent>
-    </Card>
+    </div>
   )
 }

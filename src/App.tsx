@@ -11,6 +11,7 @@ import { ScenariosPage } from '@/pages/scenarios'
 import { DataPage } from '@/pages/data'
 import { AboutPage } from '@/pages/about'
 
+
 function App() {
   return (
     <ThemeProvider>
