@@ -189,7 +189,7 @@ export function PredictionChart({ data, className }: PredictionChartProps) {
                 units: 'Biomass (μg/L)',
                 source: 'Lake Kinneret 3D Biogeochemical Model',
                 timestamp: new Date().toISOString(),
-                appName: 'Kinneret BioGeo Lab',
+                appName: 'Kinneret3D Dynamics',
                 appVersion: '1.0.0'
               }}
               filename={`prediction-${selectedGroup}-${selectedModel.name.toLowerCase().replace(/\s+/g, '-')}`}

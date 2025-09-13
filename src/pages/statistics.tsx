@@ -84,13 +84,43 @@ export function StatisticsPage() {
       </div>
 
       <Tabs defaultValue="temporal" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-3 lg:grid-cols-5">
-          <TabsTrigger value="temporal" className="text-xs sm:text-sm">Temporal</TabsTrigger>
-          <TabsTrigger value="monthly" className="text-xs sm:text-sm">Monthly</TabsTrigger>
-          <TabsTrigger value="yearly" className="text-xs sm:text-sm">Yearly</TabsTrigger>
-          <TabsTrigger value="predictions" className="text-xs sm:text-sm hidden sm:block">Predictions</TabsTrigger>
-          <TabsTrigger value="emissions" disabled className="text-xs sm:text-sm hidden sm:block">Emissions</TabsTrigger>
-        </TabsList>
+        <Card>
+          <CardContent className="p-4">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1 h-auto">
+              <TabsTrigger 
+                value="temporal" 
+                className="text-xs sm:text-sm px-1 sm:px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              >
+                Temporal
+              </TabsTrigger>
+              <TabsTrigger 
+                value="monthly" 
+                className="text-xs sm:text-sm px-1 sm:px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              >
+                Monthly
+              </TabsTrigger>
+              <TabsTrigger 
+                value="yearly" 
+                className="text-xs sm:text-sm px-1 sm:px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              >
+                Yearly
+              </TabsTrigger>
+              <TabsTrigger 
+                value="predictions" 
+                className="text-xs sm:text-sm px-1 sm:px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              >
+                Predictions
+              </TabsTrigger>
+              <TabsTrigger 
+                value="emissions" 
+                disabled 
+                className="text-xs sm:text-sm px-1 sm:px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              >
+                Emissions
+              </TabsTrigger>
+            </TabsList>
+          </CardContent>
+        </Card>
 
         <TabsContent value="temporal" className="space-y-4">
           <FigureFrame
@@ -240,7 +270,7 @@ export function StatisticsPage() {
           >
             <div className="space-y-4">
               {/* Custom Box Plot Visualization */}
-              <div className="space-y-3">
+              <div className="space-y-3 mt-6">
                 {yearlyDistributionData.map((item) => (
                   <div key={item.group} className="flex items-center gap-4">
                     <div className="w-32 text-sm font-medium text-right">{item.group}</div>

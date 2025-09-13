@@ -203,11 +203,11 @@ export function EnhancedMapView({ data, className }: EnhancedMapViewProps) {
         <h1 className="text-3xl font-bold tracking-tight">
           Biomass Heatmap — Lake {data.lake}
         </h1>
-        <div className="flex items-center gap-4 mt-2">
-          <p className="text-muted-foreground">
-            Seasonal view (Winter / Summer)
-          </p>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 mt-2">
+            <p className="text-muted-foreground">
+              Seasonal view (Winter / Summer)
+            </p>
+            <div className="flex flex-wrap items-center gap-2">
             <span className="text-sm font-medium">Layout:</span>
             <Button
               variant={layoutMode === 'single' ? 'default' : 'outline'}
@@ -234,7 +234,7 @@ export function EnhancedMapView({ data, className }: EnhancedMapViewProps) {
       {/* Season Switcher */}
       <Card className="mb-4">
         <CardContent className="pt-4">
-          <div className="flex gap-2" role="tablist" aria-label="Season selection">
+          <div className="flex flex-wrap gap-2" role="tablist" aria-label="Season selection">
             {data.rasters.map((raster) => (
               <Button
                 key={raster.id}

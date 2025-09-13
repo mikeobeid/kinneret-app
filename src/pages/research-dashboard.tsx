@@ -133,12 +133,36 @@ export function ResearchDashboardPage() {
 
       {/* Main Analysis Tabs */}
       <Tabs defaultValue="phytoplankton" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4">
-          <TabsTrigger value="phytoplankton" className="text-xs sm:text-sm">Phytoplankton</TabsTrigger>
-          <TabsTrigger value="zooplankton" className="text-xs sm:text-sm">Zooplankton</TabsTrigger>
-          <TabsTrigger value="spatial" className="text-xs sm:text-sm">Spatial</TabsTrigger>
-          <TabsTrigger value="parameters" className="text-xs sm:text-sm">Parameters</TabsTrigger>
-        </TabsList>
+        <Card>
+          <CardContent className="p-4">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 gap-1 h-auto">
+              <TabsTrigger 
+                value="phytoplankton" 
+                className="text-xs sm:text-sm px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              >
+                Phytoplankton
+              </TabsTrigger>
+              <TabsTrigger 
+                value="zooplankton" 
+                className="text-xs sm:text-sm px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              >
+                Zooplankton
+              </TabsTrigger>
+              <TabsTrigger 
+                value="spatial" 
+                className="text-xs sm:text-sm px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              >
+                Spatial
+              </TabsTrigger>
+              <TabsTrigger 
+                value="parameters" 
+                className="text-xs sm:text-sm px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              >
+                Parameters
+              </TabsTrigger>
+            </TabsList>
+          </CardContent>
+        </Card>
 
         <TabsContent value="phytoplankton" className="space-y-4">
           {/* Full Page Layout - No Nested Frames */}
@@ -166,7 +190,7 @@ export function ResearchDashboardPage() {
                   units: 'mmol P/m³',
                   source: 'Lake Kinneret monitoring program',
                   timestamp: new Date().toISOString(),
-                  appName: 'Kinneret BioGeo Lab',
+                  appName: 'Kinneret3D Dynamics',
                   appVersion: '1.0.0'
                 }}
                 filename={`research-phytoplankton-${selectedGroup}-${viewMode}`}
@@ -452,7 +476,7 @@ export function ResearchDashboardPage() {
 
         <TabsContent value="zooplankton" className="space-y-4">
           <div>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="text-center mb-4">
                 <h2 className="text-2xl font-bold">Zooplankton Dynamics</h2>
                 <p className="text-muted-foreground mt-1">
@@ -468,7 +492,7 @@ export function ResearchDashboardPage() {
                   units: 'mmol C/m³',
                   source: 'Lake Kinneret monitoring program',
                   timestamp: new Date().toISOString(),
-                  appName: 'Kinneret BioGeo Lab',
+                  appName: 'Kinneret3D Dynamics',
                   appVersion: '1.0.0'
                 }}
                 filename="research-zooplankton-dynamics"
@@ -495,7 +519,7 @@ export function ResearchDashboardPage() {
 
         <TabsContent value="spatial" className="space-y-4">
           <div>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="text-center mb-4">
                 <h2 className="text-2xl font-bold">Spatial Patterns</h2>
                 <p className="text-muted-foreground mt-1">
@@ -511,7 +535,7 @@ export function ResearchDashboardPage() {
                   units: 'mmol P/m³',
                   source: 'Lake Kinneret monitoring program',
                   timestamp: new Date().toISOString(),
-                  appName: 'Kinneret BioGeo Lab',
+                  appName: 'Kinneret3D Dynamics',
                   appVersion: '1.0.0'
                 }}
                 filename="research-spatial-patterns"

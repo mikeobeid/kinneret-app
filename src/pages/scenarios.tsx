@@ -205,7 +205,7 @@ export function ScenariosPage() {
       },
       results: resultsData,
       metadata: {
-        description: "Kinneret BioGeo Lab Scenario Export",
+        description: "Kinneret3D Dynamics Scenario Export",
         version: "1.0.0"
       }
     }
@@ -355,12 +355,12 @@ export function ScenariosPage() {
       </Card>
 
       {/* Control Buttons */}
-      <div className="flex justify-center gap-3 mb-8" role="group" aria-label="Scenario controls">
+      <div className="flex flex-wrap justify-center gap-3 mb-8" role="group" aria-label="Scenario controls">
         <Button 
           onClick={runScenario} 
           disabled={isRunning} 
-          size="lg"
-          className="px-8"
+          size="sm"
+          className="px-4 sm:px-8 text-sm sm:text-base"
           aria-label={isRunning ? 'Running scenario simulation' : 'Run scenario simulation'}
         >
           <Play className="mr-2 h-4 w-4" />
@@ -369,8 +369,8 @@ export function ScenariosPage() {
         <Button 
           onClick={resetToDefaults} 
           variant="outline"
-          size="lg"
-          className="px-6"
+          size="sm"
+          className="px-4 sm:px-6 text-sm sm:text-base"
           aria-label="Reset all parameters to default values"
         >
           <RotateCcw className="mr-2 h-4 w-4" />
@@ -379,8 +379,8 @@ export function ScenariosPage() {
         <Button 
           variant="outline" 
           onClick={exportScenario}
-          size="lg"
-          className="px-6"
+          size="sm"
+          className="px-4 sm:px-6 text-sm sm:text-base"
           aria-label="Export scenario data as JSON file"
         >
           <Download className="mr-2 h-4 w-4" />
@@ -401,14 +401,14 @@ export function ScenariosPage() {
           figureKey="model-results"
           supportsSVG={true}
         >
-          <div className="responsive-chart min-w-[360px]" role="img" aria-label="Phytoplankton biomass simulation chart showing monthly data for five groups">
+          <div className="h-[300px] sm:h-[350px] lg:h-[400px] min-w-[360px] w-full" role="img" aria-label="Phytoplankton biomass simulation chart showing monthly data for five groups">
             <LazyChart data={resultsData} colors={colors} height={320} />
           </div>
         </FigureFrame>
       </div>
 
       {/* Analysis Cards - Below Chart */}
-      <div className="responsive-grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Delta vs Baseline */}
         <Card className="responsive-card">
           <CardHeader className="pb-4">

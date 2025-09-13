@@ -107,7 +107,7 @@ export function AboutPage() {
       <div>
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">About</h1>
         <p className="text-muted-foreground text-sm sm:text-base">
-          Learn about the Kinneret BioGeo Lab and our research mission
+          Learn about the Kinneret3D Dynamics and our research mission
         </p>
       </div>
 
@@ -118,7 +118,7 @@ export function AboutPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-muted-foreground">
-            The Kinneret BioGeo Lab is dedicated to understanding the complex interactions between 
+            The Kinneret3D Dynamics is dedicated to understanding the complex interactions between 
             phytoplankton communities and biogeochemical processes in Lake Kinneret, Israel's largest 
             freshwater lake. Our research focuses on developing advanced 3D models to predict and 
             manage the lake's ecological health.

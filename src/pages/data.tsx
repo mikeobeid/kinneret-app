@@ -170,9 +170,9 @@ export function DataPage() {
         </p>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 grid-cols-1 lg:grid-cols-2">
         {/* Upload Section */}
-        <div className="space-y-4">
+        <div className="space-y-4 sm:space-y-6">
           <Card>
             <CardHeader>
               <CardTitle>Upload Data</CardTitle>
@@ -183,7 +183,7 @@ export function DataPage() {
             <CardContent>
               <div
                 {...getRootProps()}
-                className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
+                className={`border-2 border-dashed rounded-lg p-4 sm:p-8 text-center cursor-pointer transition-colors ${
                   isDragActive 
                     ? 'border-primary bg-primary/5' 
                     : uploadStatus === 'success'
@@ -196,17 +196,17 @@ export function DataPage() {
                 <input {...getInputProps()} />
                 <div className="space-y-4">
                   {isProcessing ? (
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+                    <div className="animate-spin rounded-full h-8 w-8 sm:h-12 sm:w-12 border-b-2 border-primary mx-auto"></div>
                   ) : uploadStatus === 'success' ? (
-                    <CheckCircle className="h-12 w-12 text-green-500 mx-auto" />
+                    <CheckCircle className="h-8 w-8 sm:h-12 sm:w-12 text-green-500 mx-auto" />
                   ) : uploadStatus === 'error' ? (
-                    <AlertCircle className="h-12 w-12 text-red-500 mx-auto" />
+                    <AlertCircle className="h-8 w-8 sm:h-12 sm:w-12 text-red-500 mx-auto" />
                   ) : (
-                    <Upload className="h-12 w-12 text-muted-foreground mx-auto" />
+                    <Upload className="h-8 w-8 sm:h-12 sm:w-12 text-muted-foreground mx-auto" />
                   )}
                   
                   <div>
-                    <p className="text-lg font-medium">
+                    <p className="text-base sm:text-lg font-medium">
                       {isProcessing 
                         ? 'Processing...' 
                         : uploadStatus === 'success'
@@ -218,7 +218,7 @@ export function DataPage() {
                         : 'Drag & drop a CSV file here'
                       }
                     </p>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs sm:text-sm text-muted-foreground">
                       or click to select a file
                     </p>
                   </div>
@@ -295,7 +295,7 @@ export function DataPage() {
         </div>
 
         {/* Data Preview */}
-        <div className="space-y-4">
+        <div className="space-y-4 sm:space-y-6">
           <Card>
             <CardHeader>
               <div className="flex justify-between items-center">
@@ -305,25 +305,25 @@ export function DataPage() {
                     {uploadedData.length} rows of data
                   </CardDescription>
                 </div>
-                <div className="flex gap-2">
-                  <Button onClick={exportToCSV} variant="outline" size="sm">
-                    <Download className="mr-2 h-4 w-4" />
+                <div className="flex flex-col sm:flex-row gap-2 mt-2 sm:mt-0">
+                  <Button onClick={exportToCSV} variant="outline" size="sm" className="text-xs sm:text-sm">
+                    <Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                     CSV
                   </Button>
-                  <Button onClick={exportToJSON} variant="outline" size="sm">
-                    <Download className="mr-2 h-4 w-4" />
+                  <Button onClick={exportToJSON} variant="outline" size="sm" className="text-xs sm:text-sm">
+                    <Download className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                     JSON
                   </Button>
                 </div>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+              <div className="overflow-x-auto -mx-2 sm:mx-0">
+                <table className="w-full text-xs sm:text-sm min-w-full">
                   <thead>
                     <tr className="border-b">
                       {requiredColumns.map((column) => (
-                        <th key={column} className="text-left p-2 font-medium">
+                        <th key={column} className="text-left p-1 sm:p-2 font-medium whitespace-nowrap">
                           {column}
                         </th>
                       ))}
@@ -333,7 +333,7 @@ export function DataPage() {
                     {uploadedData.slice(0, 10).map((row, index) => (
                       <tr key={index} className="border-b">
                         {requiredColumns.map((column) => (
-                          <td key={column} className="p-2">
+                          <td key={column} className="p-1 sm:p-2 whitespace-nowrap">
                             {typeof row[column] === 'number' 
                               ? row[column].toFixed(2) 
                               : row[column]
@@ -359,7 +359,7 @@ export function DataPage() {
               <CardTitle>Data Summary</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm">
                 <div>
                   <p className="text-muted-foreground">Total Rows</p>
                   <p className="font-medium">{dataSummary.totalRows}</p>

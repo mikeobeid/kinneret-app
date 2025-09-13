@@ -4,7 +4,7 @@ A comprehensive React application for analyzing phytoplankton dynamics in Lake K
 
 ## 🌊 About
 
-The Kinneret BioGeo Lab is dedicated to understanding the complex interactions between phytoplankton communities and biogeochemical processes in Lake Kinneret. Our research focuses on developing advanced 3D models to predict and manage the lake's ecological health.
+The Kinneret3D Dynamics is dedicated to understanding the complex interactions between phytoplankton communities and biogeochemical processes in Lake Kinneret. Our research focuses on developing advanced 3D models to predict and manage the lake's ecological health.
 
 ## ✨ Features
 
@@ -111,7 +111,7 @@ This is a research application. For scientific collaboration or technical contri
 
 ## 📄 License
 
-This project is part of ongoing research at the Kinneret BioGeo Lab. Please cite appropriately if used in research.
+This project is part of ongoing research at the Kinneret3D Dynamics. Please cite appropriately if used in research.
 
 ## 🙏 Acknowledgments
 
@@ -121,7 +121,7 @@ This project is part of ongoing research at the Kinneret BioGeo Lab. Please cite
 
 ## 📞 Contact
 
-For research inquiries or technical support, please contact the Kinneret BioGeo Lab research team.
+For research inquiries or technical support, please contact the Kinneret3D Dynamics research team.
 
 ---
 

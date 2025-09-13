@@ -417,7 +417,7 @@ function createMetadataText(metadata?: FigureMetadata, theme?: ThemeStyle): SVGE
   }
   
   // Add app info and timestamp
-  const appInfo = `${metadata.appName || 'Kinneret BioGeo Lab'} v${metadata.appVersion || '1.0.0'} | ${metadata.timestamp || new Date().toISOString()}`
+  const appInfo = `${metadata.appName || 'Kinneret3D Dynamics'} v${metadata.appVersion || '1.0.0'} | ${metadata.timestamp || new Date().toISOString()}`
   const app = document.createElementNS('http://www.w3.org/2000/svg', 'text')
   app.setAttribute('x', '50')
   app.setAttribute('y', y.toString())
