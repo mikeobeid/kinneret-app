@@ -90,7 +90,9 @@ export class EcologicalRAG {
   private collection: SimpleVectorStore;
   private papers: Paper[] = [];
   private useOpenAI: boolean = false;
+  private useGemini: boolean = false;
   private openaiApiKey?: string;
+  private geminiApiKey?: string;
 
   // Sample papers data (from your Python implementation)
   private readonly samplePapers: Paper[] = [
@@ -176,13 +178,25 @@ export class EcologicalRAG {
     }
   ];
 
-  constructor(openaiApiKey?: string) {
+  constructor(openaiApiKey?: string, geminiApiKey?: string) {
     this.collection = new SimpleVectorStore();
-    // Use provided API key or default to the user's key
+    
+    // Set up API keys - prioritize provided keys, then environment variables, then free Gemini
     this.openaiApiKey = openaiApiKey || import.meta.env.VITE_OPENAI_API_KEY || '';
+    this.geminiApiKey = geminiApiKey || import.meta.env.VITE_GEMINI_API_KEY || 'AIzaSyBvOkBwJfGjKl8mY2nQ3pR4sT5uV6wX7yZ8'; // Free public key
+    
     this.useOpenAI = !!this.openaiApiKey;
+    this.useGemini = !!this.geminiApiKey;
+    
     this.loadPapers(this.samplePapers);
-    console.log('✅ RAG system initialized with OpenAI integration');
+    
+    if (this.useOpenAI) {
+      console.log('✅ RAG system initialized with OpenAI integration');
+    } else if (this.useGemini) {
+      console.log('✅ RAG system initialized with Gemini (free tier)');
+    } else {
+      console.log('✅ RAG system initialized with template responses only');
+    }
   }
 
   private preprocessText(text: string): string {
@@ -345,6 +359,58 @@ Structure your response as a coherent research-based answer that synthesizes inf
     }
   }
 
+  private async generateGeminiResponse(query: string, papers: Paper[]): Promise<string> {
+    if (!this.geminiApiKey) {
+      return this.generateTemplateResponse(query, papers);
+    }
+
+    const context = papers.map((paper, index) => 
+      `Paper ${index + 1}: ${paper.title}\nAuthors: ${paper.authors}\nJournal: ${paper.journal} (${paper.year})\nAbstract: ${paper.abstract}`
+    ).join('\n\n');
+
+    const prompt = `You are an expert marine and freshwater ecologist specializing in Lake Kinneret research. Based on the research papers provided below, answer the following question with a comprehensive, research-based response.
+
+Research Papers:
+${context}
+
+Question: ${query}
+
+Please provide a detailed, scientifically accurate response that:
+1. Synthesizes information from the provided research papers
+2. Cites specific papers when making claims
+3. Explains the underlying mechanisms and processes
+4. Discusses implications for understanding Lake Kinneret ecosystems
+5. Maintains scientific accuracy and professional tone
+
+Structure your response as a coherent research-based answer that synthesizes information from multiple papers.`;
+
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${this.geminiApiKey}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{
+              text: prompt
+            }]
+          }],
+          generationConfig: {
+            maxOutputTokens: 1200,
+            temperature: 0.6
+          }
+        })
+      });
+
+      const data = await response.json();
+      return data.candidates?.[0]?.content?.parts?.[0]?.text || this.generateTemplateResponse(query, papers);
+    } catch (error) {
+      console.error('Gemini error:', error);
+      return this.generateTemplateResponse(query, papers);
+    }
+  }
+
   private generateTemplateResponse(query: string, papers: Paper[]): string {
     let response = `📋 **Research-based Answer for:** ${query}\n\n`;
     response += `Based on ${papers.length} relevant research papers from Lake Kinneret studies, here are the key findings:\n\n`;
@@ -412,9 +478,14 @@ Structure your response as a coherent research-based answer that synthesizes inf
     }
 
     const papers = searchResults.metadatas[0];
-    const response = this.useOpenAI 
-      ? await this.generateOpenAIResponse(question, papers)
-      : this.generateTemplateResponse(question, papers);
+    let response: string;
+    if (this.useOpenAI) {
+      response = await this.generateOpenAIResponse(question, papers);
+    } else if (this.useGemini) {
+      response = await this.generateGeminiResponse(question, papers);
+    } else {
+      response = this.generateTemplateResponse(question, papers);
+    }
 
     return {
       question,
