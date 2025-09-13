@@ -193,7 +193,9 @@ export class EcologicalRAG {
       hasOpenAI: !!this.openaiApiKey,
       hasGemini: !!this.geminiApiKey,
       geminiKeyLength: this.geminiApiKey?.length || 0,
-      envVar: import.meta.env.VITE_GEMINI_API_KEY ? 'Found' : 'Not found'
+      envVar: import.meta.env.VITE_GEMINI_API_KEY ? 'Found' : 'Not found',
+      envVarLength: import.meta.env.VITE_GEMINI_API_KEY?.length || 0,
+      envVarValue: import.meta.env.VITE_GEMINI_API_KEY ? import.meta.env.VITE_GEMINI_API_KEY.substring(0, 10) + '...' : 'Not found'
     });
     
     this.loadPapers(this.samplePapers);
