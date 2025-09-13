@@ -43,7 +43,10 @@ export function RAGChat({ className }: RAGChatProps) {
   };
 
   useEffect(() => {
-    scrollToBottom();
+    // Only auto-scroll if there are new messages (not on initial load)
+    if (messages.length > 1) {
+      scrollToBottom();
+    }
   }, [messages]);
 
   const exampleQuestions = [
@@ -138,7 +141,7 @@ export function RAGChat({ className }: RAGChatProps) {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             <div className="text-center">
               <div className="text-2xl font-bold text-blue-600">{ragSystem.getPaperCount()}</div>
               <div className="text-sm text-muted-foreground">Papers Loaded</div>
@@ -210,7 +213,7 @@ export function RAGChat({ className }: RAGChatProps) {
       </Card>
 
       {/* Chat Interface */}
-      <Card className="h-[700px] flex flex-col">
+      <Card className="h-[500px] sm:h-[600px] lg:h-[700px] flex flex-col">
         <CardHeader className="pb-3">
           <CardTitle className="flex items-center gap-2">
             <Users className="h-5 w-5" />
@@ -230,7 +233,7 @@ export function RAGChat({ className }: RAGChatProps) {
                 className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`rag-chat-message max-w-[80%] rounded-lg px-4 py-3 ${
+                  className={`rag-chat-message max-w-[85%] sm:max-w-[80%] rounded-lg px-3 sm:px-4 py-3 ${
                     message.type === 'user'
                       ? 'bg-blue-600 text-white'
                       : 'bg-muted text-foreground'

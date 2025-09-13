@@ -144,7 +144,7 @@ export function ResearchDashboardPage() {
           {/* Full Page Layout - No Nested Frames */}
           <div className="space-y-4">
             {/* Header Section */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <h2 className="text-2xl font-bold">Phytoplankton Depth-Time Analysis</h2>
                 <p className="text-muted-foreground mt-1">
@@ -199,7 +199,7 @@ export function ResearchDashboardPage() {
             </div>
 
             {/* View Mode Toggle */}
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               <button 
                 className={`px-3 py-1 text-sm rounded ${
                   viewMode === 'heatmap' 

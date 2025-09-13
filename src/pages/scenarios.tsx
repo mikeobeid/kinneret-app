@@ -262,7 +262,7 @@ export function ScenariosPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="responsive-space-md">
-          <div className="responsive-grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {Object.entries(nutrientValues).map(([nutrient, config]) => (
               <div key={nutrient} className="responsive-space-sm">
                 <div className="flex justify-between items-center mb-3">

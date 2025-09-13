@@ -84,7 +84,7 @@ export function PredictionChart({ data, className }: PredictionChartProps) {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Group Selection */}
             <div className="space-y-2">
               <label className="text-sm font-medium">Phytoplankton Group</label>
@@ -154,7 +154,7 @@ export function PredictionChart({ data, className }: PredictionChartProps) {
           </div>
 
           {/* Options */}
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <Button
               variant={showConfidence ? "default" : "outline"}
               size="sm"
@@ -170,7 +170,7 @@ export function PredictionChart({ data, className }: PredictionChartProps) {
       {/* Prediction Results */}
       <Card ref={cardRef}>
         <CardHeader>
-          <div className="flex items-start justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
             <div>
               <CardTitle className="flex items-center gap-2">
                 <TrendingUp className="h-5 w-5" />
@@ -201,7 +201,7 @@ export function PredictionChart({ data, className }: PredictionChartProps) {
                 month: monthsAhead[0],
                 season: new Date().getMonth() >= 4 && new Date().getMonth() <= 9 ? 'summer' : 'winter'
               }}
-              className="ml-4"
+              className="sm:ml-4"
             />
           </div>
         </CardHeader>

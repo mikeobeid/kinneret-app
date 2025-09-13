@@ -320,28 +320,28 @@ export function DashboardPage() {
 
         <TabsContent value="results" className="space-y-4">
           {/* PCA View Controls */}
-          <div className="flex gap-2 mb-6">
+          <div className="flex flex-wrap gap-2 mb-6">
             <Button 
               variant={pcaView === 'biplot' ? 'default' : 'outline'}
               onClick={() => setPcaView('biplot')}
-              size="lg"
-              className="px-6"
+              size="sm"
+              className="px-3 sm:px-6 text-xs sm:text-sm"
             >
               Biplot
             </Button>
             <Button 
               variant={pcaView === 'scree' ? 'default' : 'outline'}
               onClick={() => setPcaView('scree')}
-              size="lg"
-              className="px-6"
+              size="sm"
+              className="px-3 sm:px-6 text-xs sm:text-sm"
             >
               Scree Plot
             </Button>
             <Button 
               variant={pcaView === 'loadings' ? 'default' : 'outline'}
               onClick={() => setPcaView('loadings')}
-              size="lg"
-              className="px-6"
+              size="sm"
+              className="px-3 sm:px-6 text-xs sm:text-sm"
             >
               Loadings
             </Button>
@@ -363,7 +363,7 @@ export function DashboardPage() {
                 </p>
               </div>
               
-              <div className="h-[600px]">
+              <div className="h-[400px] sm:h-[500px] lg:h-[600px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <ScatterChart data={pcaData} margin={{ top: 20, right: 20, bottom: 40, left: 40 }}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -402,7 +402,7 @@ export function DashboardPage() {
               {pcaResults && (
                 <div className="mt-4 p-4 bg-muted/20 rounded-lg">
                   <h4 className="text-sm font-semibold mb-3">Variable Loadings (Arrows)</h4>
-                  <div className="flex flex-wrap gap-4 justify-center">
+                  <div className="flex flex-wrap gap-2 sm:gap-4 justify-center">
                     {loadingsData.map((loading, index) => (
                       <div key={loading.variable} className="flex items-center gap-2">
                         <div className="flex items-center gap-1">
@@ -449,7 +449,7 @@ export function DashboardPage() {
                 </p>
               </div>
               
-              <div className="h-[450px]">
+              <div className="h-[350px] sm:h-[400px] lg:h-[450px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={screeData} margin={{ top: 20, right: 20, bottom: 40, left: 60 }}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -495,7 +495,7 @@ export function DashboardPage() {
                 </p>
               </div>
               
-              <div className="h-[450px]">
+              <div className="h-[350px] sm:h-[400px] lg:h-[450px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <ScatterChart data={loadingsData} margin={{ top: 20, right: 20, bottom: 40, left: 40 }}>
                     <CartesianGrid strokeDasharray="3 3" />

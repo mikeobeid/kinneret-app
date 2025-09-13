@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
 import { 
   DropdownMenu, 
   DropdownMenuContent, 
   DropdownMenuItem, 
-  DropdownMenuTrigger,
-  DropdownMenuSeparator
+  DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { Checkbox } from '@/components/ui/checkbox'
 import { 
@@ -23,13 +21,10 @@ import {
 } from 'lucide-react'
 import { 
   exportNodeAsSVG, 
-  exportNodeAsPNG, 
   downloadBlob, 
-  sanitizeFileName,
   ExportOptions,
   FigureMetadata,
-  FIGURE_SIZES,
-  THEME_STYLES
+  FIGURE_SIZES
 } from '@/lib/figure/engine'
 
 interface FigureExportControlsProps {
@@ -75,7 +70,6 @@ export function FigureExportControls({
     
     try {
       const size = FIGURE_SIZES[exportSize]
-      const sanitizedFilename = sanitizeFileName(filename)
       
       // Generate wind lab specific filename
       let finalFilename: string
@@ -223,7 +217,7 @@ export function FigureExportControls({
   const currentSize = sizeOptions.find(s => s.value === exportSize)
 
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={`flex flex-wrap items-center gap-1 sm:gap-2 ${className}`}>
       {/* Format Dropdown */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -231,13 +225,13 @@ export function FigureExportControls({
             size="sm"
             variant="outline"
             disabled={isExporting}
-            className="flex items-center gap-1"
+            className="flex items-center gap-1 min-w-0"
           >
-            {exportFormat === 'png' && <Image className="h-3 w-3" />}
-            {exportFormat === 'svg' && <FileText className="h-3 w-3" />}
-            {exportFormat === 'pdf' && <FileText className="h-3 w-3" />}
-            <span className="text-xs uppercase">{exportFormat}</span>
-            <ChevronDown className="h-3 w-3" />
+            {exportFormat === 'png' && <Image className="h-3 w-3 flex-shrink-0" />}
+            {exportFormat === 'svg' && <FileText className="h-3 w-3 flex-shrink-0" />}
+            {exportFormat === 'pdf' && <FileText className="h-3 w-3 flex-shrink-0" />}
+            <span className="text-xs uppercase hidden xs:inline">{exportFormat}</span>
+            <ChevronDown className="h-3 w-3 flex-shrink-0" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -269,19 +263,19 @@ export function FigureExportControls({
           handleExport(exportFormat)
         }}
         disabled={isExporting}
-        className="flex items-center gap-1"
+        className="flex items-center gap-1 min-w-0"
       >
-        <Download className="h-3 w-3" />
-        <span className="text-xs">Export</span>
+        <Download className="h-3 w-3 flex-shrink-0" />
+        <span className="text-xs hidden xs:inline">Export</span>
       </Button>
 
       {/* Style Dropdown */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button size="sm" variant="outline" className="flex items-center gap-1">
-            <Palette className="h-3 w-3" />
-            {currentStyle?.icon && <currentStyle.icon className="h-3 w-3" />}
-            <span className="text-xs">{currentStyle?.label}</span>
+          <Button size="sm" variant="outline" className="flex items-center gap-1 min-w-0">
+            <Palette className="h-3 w-3 flex-shrink-0" />
+            {currentStyle?.icon && <currentStyle.icon className="h-3 w-3 flex-shrink-0" />}
+            <span className="text-xs hidden sm:inline">{currentStyle?.label}</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -302,9 +296,10 @@ export function FigureExportControls({
       {/* Size Dropdown */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button size="sm" variant="outline" className="flex items-center gap-1">
-            <Settings className="h-3 w-3" />
-            <span className="text-xs">{currentSize?.label}</span>
+          <Button size="sm" variant="outline" className="flex items-center gap-1 min-w-0">
+            <Settings className="h-3 w-3 flex-shrink-0" />
+            <span className="text-xs hidden md:inline truncate max-w-[120px]">{currentSize?.label}</span>
+            <span className="text-xs md:hidden">Size</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -324,12 +319,12 @@ export function FigureExportControls({
       {/* Options */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button size="sm" variant="outline" className="flex items-center gap-1">
-            <Settings className="h-3 w-3" />
-            <span className="text-xs">Options</span>
+          <Button size="sm" variant="outline" className="flex items-center gap-1 min-w-0">
+            <Settings className="h-3 w-3 flex-shrink-0" />
+            <span className="text-xs hidden xs:inline">Options</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuContent align="end" className="w-56 max-w-[90vw]">
           <div className="p-2">
             <div className="space-y-3">
               <div className="flex items-center space-x-2">

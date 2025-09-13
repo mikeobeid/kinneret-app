@@ -88,8 +88,8 @@ export function StatisticsPage() {
           <TabsTrigger value="temporal" className="text-xs sm:text-sm">Temporal</TabsTrigger>
           <TabsTrigger value="monthly" className="text-xs sm:text-sm">Monthly</TabsTrigger>
           <TabsTrigger value="yearly" className="text-xs sm:text-sm">Yearly</TabsTrigger>
-          <TabsTrigger value="predictions" className="text-xs sm:text-sm hidden lg:block">Predictions</TabsTrigger>
-          <TabsTrigger value="emissions" disabled className="text-xs sm:text-sm hidden lg:block">Emissions</TabsTrigger>
+          <TabsTrigger value="predictions" className="text-xs sm:text-sm hidden sm:block">Predictions</TabsTrigger>
+          <TabsTrigger value="emissions" disabled className="text-xs sm:text-sm hidden sm:block">Emissions</TabsTrigger>
         </TabsList>
 
         <TabsContent value="temporal" className="space-y-4">
@@ -306,7 +306,7 @@ export function StatisticsPage() {
               </div>
               
               {/* Legend */}
-              <div className="flex items-center gap-6 text-xs text-gray-600">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-xs text-gray-600">
                 <div className="flex items-center gap-2">
                   <div className="w-4 h-3 bg-blue-200 border border-blue-400 rounded"></div>
                   <span>Q1-Q3 Range</span>
@@ -357,7 +357,7 @@ export function StatisticsPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
                 <div className="p-4 bg-blue-50 rounded-lg">
                   <h4 className="font-semibold text-blue-900 mb-2">Multiple Models</h4>
                   <p className="text-sm text-blue-800">
