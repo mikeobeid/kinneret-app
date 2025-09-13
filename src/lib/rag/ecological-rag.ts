@@ -179,7 +179,7 @@ export class EcologicalRAG {
   constructor(openaiApiKey?: string) {
     this.collection = new SimpleVectorStore();
     // Use provided API key or default to the user's key
-    this.openaiApiKey = openaiApiKey || process.env.REACT_APP_OPENAI_API_KEY || '';
+    this.openaiApiKey = openaiApiKey || import.meta.env.VITE_OPENAI_API_KEY || '';
     this.useOpenAI = !!this.openaiApiKey;
     this.loadPapers(this.samplePapers);
     console.log('✅ RAG system initialized with OpenAI integration');
