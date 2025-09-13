@@ -1,0 +1,51 @@
+/* RAG Chat Component Styles */
+.rag-chat-message {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.rag-chat-container {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.rag-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+  padding-right: 0.5rem;
+}
+
+.rag-chat-input {
+  flex-shrink: 0;
+}
+
+/* Ensure proper spacing between elements */
+.rag-chat-section {
+  margin-bottom: 1rem;
+}
+
+.rag-chat-section:last-child {
+  margin-bottom: 0;
+}
+
+/* Fix for overlapping text */
+.prose {
+  line-height: 1.6;
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+/* Ensure buttons don't overlap */
+.example-question-button {
+  white-space: normal;
+  word-wrap: break-word;
+  height: auto;
+  min-height: 2.5rem;
+  padding: 0.75rem;
+  text-align: left;
+}

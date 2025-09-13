@@ -1,8 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts'
 import { useDataStore } from '@/store/data-store'
 import { FigureFrame } from '@/components/figure-frame'
+import { PredictionChart } from '@/components/predictions'
 import { useRef } from 'react'
 
 const colors = {
@@ -87,7 +88,7 @@ export function StatisticsPage() {
           <TabsTrigger value="temporal" className="text-xs sm:text-sm">Temporal</TabsTrigger>
           <TabsTrigger value="monthly" className="text-xs sm:text-sm">Monthly</TabsTrigger>
           <TabsTrigger value="yearly" className="text-xs sm:text-sm">Yearly</TabsTrigger>
-          <TabsTrigger value="predictions" disabled className="text-xs sm:text-sm hidden lg:block">Predictions</TabsTrigger>
+          <TabsTrigger value="predictions" className="text-xs sm:text-sm hidden lg:block">Predictions</TabsTrigger>
           <TabsTrigger value="emissions" disabled className="text-xs sm:text-sm hidden lg:block">Emissions</TabsTrigger>
         </TabsList>
 
@@ -341,6 +342,98 @@ export function StatisticsPage() {
                   <span>N-fixers and Microcystis show slightly higher variability compared to other groups</span>
                 </li>
               </ul>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="predictions" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                🧠 AI-Powered Phytoplankton Predictions
+              </CardTitle>
+              <CardDescription>
+                Advanced machine learning models for forecasting phytoplankton biomass trends in Lake Kinneret
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <h4 className="font-semibold text-blue-900 mb-2">Multiple Models</h4>
+                  <p className="text-sm text-blue-800">
+                    Linear regression, polynomial fit, seasonal decomposition, exponential smoothing, and ARIMA models
+                  </p>
+                </div>
+                <div className="p-4 bg-green-50 rounded-lg">
+                  <h4 className="font-semibold text-green-900 mb-2">Accuracy Tracking</h4>
+                  <p className="text-sm text-green-800">
+                    Real-time model performance metrics and confidence intervals for reliable predictions
+                  </p>
+                </div>
+                <div className="p-4 bg-purple-50 rounded-lg">
+                  <h4 className="font-semibold text-purple-900 mb-2">Interactive Controls</h4>
+                  <p className="text-sm text-purple-800">
+                    Customize prediction horizons, select models, and compare different phytoplankton groups
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <PredictionChart 
+                  data={timeSeriesData.map(item => ({
+                    date: item.date,
+                    diatoms: item.diatoms || 0,
+                    dinoflagellates: item.dinoflagellates || 0,
+                    small_phyto: item.small_phyto || 0,
+                    n_fixers: item.n_fixers || 0,
+                    microcystis: item.microcystis || 0,
+                  }))}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Prediction Insights</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-semibold mb-3">Model Recommendations</h4>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span><strong>Linear Trend:</strong> Best for short-term predictions (1-6 months) with stable data</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span><strong>Seasonal Decomposition:</strong> Ideal for capturing seasonal phytoplankton cycles</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span><strong>ARIMA Model:</strong> Most accurate for complex time series with multiple patterns</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-3">Usage Guidelines</h4>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Use shorter prediction horizons (3-6 months) for higher confidence</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Compare multiple models to identify consensus predictions</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Consider confidence intervals when interpreting results</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
