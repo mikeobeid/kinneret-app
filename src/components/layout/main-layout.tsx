@@ -16,9 +16,11 @@ export function MainLayout({ children }: MainLayoutProps) {
       <Header onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
-      <main className="ml-0 md:ml-64 transition-all duration-200">
+      <main className="ml-0 md:ml-64 transition-all duration-200 pt-16">
         <div className="responsive-container min-h-[calc(100dvh-4rem)]">
-          <DemoBanner />
+          <div className="mt-6">
+            <DemoBanner />
+          </div>
           <div className="mt-4">
             {children || <Outlet />}
           </div>
