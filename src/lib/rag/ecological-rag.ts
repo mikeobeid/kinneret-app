@@ -188,6 +188,14 @@ export class EcologicalRAG {
     this.useOpenAI = !!this.openaiApiKey;
     this.useGemini = !!this.geminiApiKey;
     
+    // Debug logging
+    console.log('🔍 API Key Debug:', {
+      hasOpenAI: !!this.openaiApiKey,
+      hasGemini: !!this.geminiApiKey,
+      geminiKeyLength: this.geminiApiKey?.length || 0,
+      envVar: import.meta.env.VITE_GEMINI_API_KEY ? 'Found' : 'Not found'
+    });
+    
     this.loadPapers(this.samplePapers);
     
     if (this.useOpenAI) {
@@ -195,7 +203,7 @@ export class EcologicalRAG {
     } else if (this.useGemini) {
       console.log('✅ RAG system initialized with Gemini (free tier)');
     } else {
-      console.log('✅ RAG system initialized with template responses only');
+      console.log('❌ RAG system initialized with template responses only');
     }
   }
 
@@ -385,7 +393,7 @@ Please provide a detailed, scientifically accurate response that:
 Structure your response as a coherent research-based answer that synthesizes information from multiple papers.`;
 
     try {
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${this.geminiApiKey}`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${this.geminiApiKey}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -399,12 +407,32 @@ Structure your response as a coherent research-based answer that synthesizes inf
           generationConfig: {
             maxOutputTokens: 1200,
             temperature: 0.6
-          }
+          },
+          safetySettings: [
+            {
+              category: "HARM_CATEGORY_HARASSMENT",
+              threshold: "BLOCK_MEDIUM_AND_ABOVE"
+            }
+          ]
         })
       });
 
+      if (!response.ok) {
+        console.error('Gemini API error:', response.status, response.statusText);
+        const errorData = await response.text();
+        console.error('Error details:', errorData);
+        return this.generateTemplateResponse(query, papers);
+      }
+
       const data = await response.json();
-      return data.candidates?.[0]?.content?.parts?.[0]?.text || this.generateTemplateResponse(query, papers);
+      console.log('Gemini API response:', data);
+      
+      if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+        return data.candidates[0].content.parts[0].text;
+      } else {
+        console.error('Unexpected Gemini response format:', data);
+        return this.generateTemplateResponse(query, papers);
+      }
     } catch (error) {
       console.error('Gemini error:', error);
       return this.generateTemplateResponse(query, papers);
