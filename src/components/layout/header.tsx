@@ -25,8 +25,8 @@ export function Header({ onMenuToggle }: HeaderProps) {
           <div className="responsive-flex min-w-0">
             <span className="text-xl sm:text-2xl flex-shrink-0">🦠</span>
             <div className="min-w-0">
-              <h1 className="responsive-heading font-bold text-primary responsive-text-truncate">Kinneret BioGeo Lab</h1>
-              <p className="responsive-text text-muted-foreground hidden sm:block">3D Biogeochemical Model</p>
+              <h1 className="text-lg sm:text-xl font-bold text-primary overflow-hidden text-ellipsis whitespace-nowrap">Kinneret BioGeo Lab</h1>
+              <p className="text-sm text-muted-foreground hidden sm:block">3D Biogeochemical Model</p>
             </div>
           </div>
         </div>
