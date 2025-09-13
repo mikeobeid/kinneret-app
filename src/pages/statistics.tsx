@@ -86,7 +86,7 @@ export function StatisticsPage() {
       <Tabs defaultValue="temporal" className="space-y-4">
         <Card>
           <CardContent className="p-4">
-            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1 h-auto">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 gap-1 h-auto">
               <TabsTrigger 
                 value="temporal" 
                 className="text-xs sm:text-sm px-1 sm:px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
@@ -110,13 +110,6 @@ export function StatisticsPage() {
                 className="text-xs sm:text-sm px-1 sm:px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
               >
                 Predictions
-              </TabsTrigger>
-              <TabsTrigger 
-                value="emissions" 
-                disabled 
-                className="text-xs sm:text-sm px-1 sm:px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-              >
-                Emissions
               </TabsTrigger>
             </TabsList>
           </CardContent>
