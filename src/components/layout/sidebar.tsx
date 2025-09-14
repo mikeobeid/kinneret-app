@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom'
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
 import {
   Home,
   Activity,
@@ -9,16 +8,12 @@ import {
   PlayCircle,
   Database,
   Info,
-  Microscope,
-  ChevronLeft,
-  ChevronRight
+  Microscope
 } from 'lucide-react'
 
 interface SidebarProps {
   isOpen: boolean
   onClose: () => void
-  onToggleSidebar?: () => void
-  sidebarCollapsed?: boolean
 }
 
 const navigation = [
@@ -32,7 +27,7 @@ const navigation = [
   { name: 'About', href: '/about', icon: Info },
 ]
 
-export function Sidebar({ isOpen, onClose, onToggleSidebar, sidebarCollapsed }: SidebarProps) {
+export function Sidebar({ isOpen, onClose }: SidebarProps) {
   return (
     <>
       {/* Mobile overlay */}
@@ -46,32 +41,11 @@ export function Sidebar({ isOpen, onClose, onToggleSidebar, sidebarCollapsed }: 
       {/* Sidebar */}
       <div
         className={cn(
-          'fixed left-0 top-16 z-50 h-[calc(100vh-4rem)] border-r bg-background transition-all duration-200 ease-in-out md:translate-x-0',
-          sidebarCollapsed ? 'w-16' : 'w-64',
+          'fixed left-0 top-16 z-50 h-[calc(100vh-4rem)] w-64 transform border-r bg-background transition-transform duration-200 ease-in-out md:translate-x-0',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
         <nav className="flex flex-col space-y-1 p-4">
-          {/* Toggle Button */}
-          {onToggleSidebar && (
-            <div className="mb-4 pb-4 border-b">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={onToggleSidebar}
-                className="w-full justify-center"
-                title={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-              >
-                {sidebarCollapsed ? (
-                  <ChevronRight className="h-4 w-4" />
-                ) : (
-                  <ChevronLeft className="h-4 w-4" />
-                )}
-              </Button>
-            </div>
-          )}
-          
-          {/* Navigation Items */}
           {navigation.map((item) => {
             const Icon = item.icon
             return (
@@ -84,14 +58,12 @@ export function Sidebar({ isOpen, onClose, onToggleSidebar, sidebarCollapsed }: 
                     'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground',
                     isActive
                       ? 'bg-accent text-accent-foreground'
-                      : 'text-muted-foreground',
-                    sidebarCollapsed && 'justify-center'
+                      : 'text-muted-foreground'
                   )
                 }
-                title={sidebarCollapsed ? item.name : undefined}
               >
-                <Icon className="h-4 w-4 flex-shrink-0" />
-                {!sidebarCollapsed && item.name}
+                <Icon className="h-4 w-4" />
+                {item.name}
               </NavLink>
             )
           })}
