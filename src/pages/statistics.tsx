@@ -313,11 +313,24 @@ export function StatisticsPage() {
                           transform: 'translate(-50%, -50%)'
                         }}
                       />
-                      {/* Value labels */}
-                      <div className="absolute -top-6 left-0 text-xs text-gray-500">
+                      
+                      {/* Value labels - small and transparent above markers */}
+                      <div 
+                        className="absolute -top-2 text-xs text-gray-500"
+                        style={{ 
+                          left: `${item.min * 100}%`,
+                          transform: 'translateX(-50%)'
+                        }}
+                      >
                         {item.min.toFixed(1)}
                       </div>
-                      <div className="absolute -top-6 right-0 text-xs text-gray-500">
+                      <div 
+                        className="absolute -top-2 text-xs text-gray-500"
+                        style={{ 
+                          left: `${item.max * 100}%`,
+                          transform: 'translateX(-50%)'
+                        }}
+                      >
                         {item.max.toFixed(1)}
                       </div>
                     </div>
