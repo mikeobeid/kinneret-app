@@ -48,7 +48,7 @@ export function HomePage() {
       <section className="text-center responsive-space-y py-8 sm:py-12">
         <div className="responsive-space-y">
           <h1 className="responsive-large-heading font-bold tracking-tight text-foreground">
-            Kinneret 3D Biogeochemical Model
+            Kinneret3DEcology
           </h1>
           <p className="responsive-text text-muted-foreground max-w-2xl mx-auto px-4">
             Interactive Kinneret biogeochemical insights — groups, seasons, and nutrient scenarios.

@@ -4,6 +4,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { useDataStore } from '@/store/data-store'
 import { FigureFrame } from '@/components/figure-frame'
 import { PredictionChart } from '@/components/predictions'
+import { KinneretHeatmap } from '@/components/kinneret-heatmap'
 import { useRef } from 'react'
 
 const colors = {
@@ -86,7 +87,7 @@ export function StatisticsPage() {
       <Tabs defaultValue="temporal" className="space-y-4">
         <Card>
           <CardContent className="p-4">
-            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 gap-1 h-auto">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-5 gap-1 h-auto">
               <TabsTrigger 
                 value="temporal" 
                 className="text-xs sm:text-sm px-1 sm:px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
@@ -104,6 +105,12 @@ export function StatisticsPage() {
                 className="text-xs sm:text-sm px-1 sm:px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
               >
                 Yearly
+              </TabsTrigger>
+              <TabsTrigger 
+                value="heatmap" 
+                className="text-xs sm:text-sm px-1 sm:px-2 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              >
+                Heatmap
               </TabsTrigger>
               <TabsTrigger 
                 value="predictions" 
@@ -466,6 +473,71 @@ export function StatisticsPage() {
                     <li className="flex items-start gap-2">
                       <span className="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></span>
                       <span>Consider confidence intervals when interpreting results</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="heatmap" className="space-y-4">
+          <FigureFrame
+            title="Lake Kinneret Biomass Heatmap"
+            subtitle="Spatial distribution of phytoplankton biomass across Lake Kinneret"
+            caption="2D heatmap visualization showing biomass concentration patterns. Data represents surface layer (0-0.5m depth) from 2019 model results."
+            units="mmol P/m³"
+            pageName="statistics"
+            figureKey="kinneret-heatmap"
+          >
+            <KinneretHeatmap
+              data={[]} // Empty array, component generates its own data
+              title="Lake Kinneret Biomass Distribution"
+              description="Interactive heatmap showing spatial patterns of phytoplankton biomass"
+              height={600}
+            />
+          </FigureFrame>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Heatmap Insights</CardTitle>
+              <CardDescription>
+                Understanding spatial patterns in Lake Kinneret phytoplankton distribution
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-semibold text-lg mb-3 text-blue-900">Winter Patterns</h4>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Higher biomass concentrations in central and southern regions</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Maximum values up to 0.045 mmol P/m³</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Driven by winter circulation patterns and nutrient availability</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-lg mb-3 text-green-900">Summer Patterns</h4>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Concentrated along western and southwestern coasts</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Maximum values up to 0.015 mmol P/m³</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></span>
+                      <span>Influenced by westerly winds and internal wave dynamics</span>
                     </li>
                   </ul>
                 </div>

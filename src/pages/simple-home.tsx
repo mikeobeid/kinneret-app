@@ -39,7 +39,7 @@ export function SimpleHomePage() {
       <section className="text-center space-y-6 py-12">
         <div className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
-            Kinneret 3D Biogeochemical Model
+            Kinneret3DEcology
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Advanced monitoring and modeling of phytoplankton dynamics in Lake Kinneret

@@ -2,6 +2,7 @@
 export { KpiCard } from './kpi-card'
 export { TimeseriesChart } from './timeseries-chart'
 export { HeatLegend } from './heat-legend'
+export { KinneretHeatmap } from './kinneret-heatmap'
 export { MapView } from './map-view'
 export { ParamSliders } from './param-sliders'
 export { CsvUploader } from './csv-uploader'

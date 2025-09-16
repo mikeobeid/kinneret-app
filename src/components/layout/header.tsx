@@ -25,7 +25,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
           <div className="flex items-center gap-3">
             <span className="text-xl sm:text-2xl flex-shrink-0">🦠</span>
             <div className="flex-shrink-0">
-              <h1 className="text-lg sm:text-xl font-bold text-primary">Kinneret3D Dynamics</h1>
+              <h1 className="text-lg sm:text-xl font-bold text-primary">Kinneret3DEcology</h1>
               <p className="text-sm text-muted-foreground hidden sm:block">3D Biogeochemical Model</p>
             </div>
           </div>

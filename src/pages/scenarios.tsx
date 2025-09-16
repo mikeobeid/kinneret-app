@@ -205,7 +205,7 @@ export function ScenariosPage() {
       },
       results: resultsData,
       metadata: {
-        description: "Kinneret3D Dynamics Scenario Export",
+        description: "Kinneret3DEcology Scenario Export",
         version: "1.0.0"
       }
     }

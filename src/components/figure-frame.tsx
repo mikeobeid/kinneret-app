@@ -42,7 +42,7 @@ export const FigureFrame = forwardRef<HTMLDivElement, FigureFrameProps>(({
     units,
     source: source || 'Lake Kinneret monitoring program',
     timestamp: new Date().toISOString(),
-    appName: 'Kinneret3D Dynamics',
+    appName: 'Kinneret3DEcology',
     appVersion: '1.0.0'
   }
 
